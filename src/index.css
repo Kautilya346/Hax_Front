@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'fs-gravity';
+    src: url('./assets/fs-gravity.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
