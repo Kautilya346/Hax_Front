@@ -69,9 +69,9 @@ const ProductPage = () => {
   );
 
   return (
-    <div className="bg-pink h-screen">
+    <div className="h-full w-screen">
     
-    <div className="bg-[#f5f2e5] min-h-screen w-screen "> 
+    <div className="bg-[#f5f2e5] h-full w-screen "> 
     <GridLines
             className="grid-area"
             ccellWidth={20}
