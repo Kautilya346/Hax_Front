@@ -6,19 +6,21 @@ import SignupPage from "./pages/SignupPage";
 import SearchPage from "./pages/SearchPage";
 import ExplorePage from "./pages/ExplorePage";
 import Navbar from "./pages/Navbar";
+import ProfilePage from "./pages/ProfilePage";
 
 
 const App = () => {
   return (
     <Router>
       <Navbar/>
-      <Routes>
+      <ProfilePage/>
+      {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/explore" element={<ExplorePage />} />
-      </Routes>
+      </Routes> */}
     </Router>
   );
 };
