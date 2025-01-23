@@ -5,11 +5,13 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import SearchPage from "./pages/SearchPage";
 import ProductPage from "./pages/ProductPage";
+import Navbar from "./pages/Navbar";
 
 
 const App = () => {
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

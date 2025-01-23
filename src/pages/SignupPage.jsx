@@ -27,6 +27,12 @@ const SignupPage = () => {
         > */}
         
         <div className="bg-[#f5f2e5] h-screen flex items-center justify-center">
+          <GridLines
+                  className="grid-area"
+                  cellWidth={20}
+                  strokeWidth={1}
+                  cellWidth2={20}
+                >
           <div className="border-2 border-black p-10  rounded-lg relative">
             <div className="border-2 border-black p-8 rounded-md">
               <div className="border-2 border-black p-6 rounded-md">
@@ -82,6 +88,7 @@ const SignupPage = () => {
               </div>
             </div>
           </div>
+          </GridLines>
         </div>
       {/* </GridLines> */}
     </>
