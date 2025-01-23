@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        gravity: ['fs-gravity'], // Add custom font here
+      },
+    },
   },
   plugins: [],
 }
