@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import SearchPage from "./pages/SearchPage";
-import ProductPage from "./pages/ProductPage";
+import ExplorePage from "./pages/ExplorePage";
 import Navbar from "./pages/Navbar";
 
 
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/explore" element={<ExplorePage />} />
       </Routes>
     </Router>
   );

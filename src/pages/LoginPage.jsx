@@ -29,9 +29,9 @@ const LoginPage = () => {
             <div className="border-2 border-black p-8 rounded-md">
               <div
                 id="ultimate"
-                className="border-2 border-black p-6 w-max rounded-md backdrop-filter backdrop-blur-sm" // Added backdrop-filter and backdrop-blur-md classes
+                className="border-2 border-black p-6 w-max rounded-md"
               >
-                <div className="border-b-2 border-black ">
+                <div className="border-b-2 border-black">
                   <h2 className="text-6xl font-bold text-black text-center font-gravity tracking-wider">
                     Login
                   </h2>
@@ -41,7 +41,9 @@ const LoginPage = () => {
                   className="space-y-4 mt-6 font-mono"
                 >
                   <div className="flex items-center space-x-4">
-                    <label className="text-xl font-semibold w-28 text-black ">Username</label>
+                    <label className="text-xl font-semibold w-28 text-black">
+                      Username
+                    </label>
                     <input
                       type="text"
                       name="username"
@@ -52,7 +54,9 @@ const LoginPage = () => {
                     />
                   </div>
                   <div className="flex items-center space-x-4">
-                    <label className="text-xl font-semibold  w-28 text-black">Passkey</label>
+                    <label className="text-xl font-semibold  w-28 text-black">
+                      Passkey
+                    </label>
                     <input
                       type="password"
                       name="privateKey"
@@ -69,6 +73,17 @@ const LoginPage = () => {
                     Login
                   </button>
                 </form>
+                <div className="mt-4 text-center">
+                  <p className="text-sm text-black">
+                    Don’t have an account?{" "}
+                    <a
+                      href="/signup"
+                      className="text-[#DC483A] font-bold underline"
+                    >
+                      Sign up here
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -77,5 +92,4 @@ const LoginPage = () => {
     </>
   );
 };
-
 export default LoginPage;

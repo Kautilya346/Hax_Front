@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PeopleCard } from "../components/PeopleCard";
 import GridLines from "react-gridlines";
 
-const ProductPage = () => {
+const ExplorePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const peopledata = [
@@ -105,4 +105,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default ExplorePage;
