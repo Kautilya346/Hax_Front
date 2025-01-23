@@ -7,4 +7,43 @@
     src: url('./assets/fs-gravity.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+#background-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), transparent);
+  pointer-events: none;
+}
+
+/* Add this in your CSS file */
+.animate-dino {
+  animation: dinoMovement 2s infinite ease-in-out;
+}
+
+
+/* ek jgh pr koooodna */
+
+@keyframes dinoMovement {
+  0% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
