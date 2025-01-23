@@ -54,7 +54,7 @@ const LoginPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-black text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                  className="bg3A]-[#DC48 text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
                 >
                   Login
                 </button>

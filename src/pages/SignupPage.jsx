@@ -74,7 +74,7 @@ const SignupPage = () => {
                   </div>
                   <button
                     type="submit"
-                    className="bg-black text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                    className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
                   >
                     Sign Up
                   </button>
