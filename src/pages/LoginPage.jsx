@@ -1,61 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import GridLines from "react-gridlines";
 
-const LoginPage = () => {
-    const [username, setUsername] = useState('');
-    const [privateKey, setPrivateKey] = useState('');
+const SignupPage = () => {
+  const [formData, setFormData] = useState({
+    fullname: "",
+    username: "",
+    email: "",
+  });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle login logic here
-        console.log('Username:', username);
-        console.log('Private Key:', privateKey);
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    return (
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+  };
+
+  return (
+    <>
+      {/* <GridLines
+        className="grid-area"
+        cellWidth={50}
+        strokeWidth={1}
+        cellWidth2={50}
+        > */}
+        
         <div className="bg-[#f5f2e5] h-screen flex items-center justify-center">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white border-2 border-black rounded shadow-md">
-                <h2 className="text-2xl font-bold text-center text-black">Login</h2>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label htmlFor="username" className="sr-only">Username</label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                required
-                                className="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#DC483A] focus:border-[#DC483A] sm:text-sm"
-                                placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="privateKey" className="sr-only">Private Key</label>
-                            <input
-                                id="privateKey"
-                                name="privateKey"
-                                type="password"
-                                required
-                                className="relative block w-full px-3 py-2 border border-gray-300 rounded-b-md focus:outline-none focus:ring-[#DC483A] focus:border-[#DC483A] sm:text-sm"
-                                placeholder="Private Key"
-                                value={privateKey}
-                                onChange={(e) => setPrivateKey(e.target.value)}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <button
-                            type="submit"
-                            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-[#DC483A] border border-transparent rounded-md group hover:bg-[#b83a2e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#DC483A]"
-                        >
-                            Sign In
-                        </button>
-                    </div>
+          <div className="border-2 border-black p-10  rounded-lg relative">
+            <div className="border-2 border-black p-8 rounded-md">
+              <div className="border-2 border-black p-6 rounded-md">
+                <div className="border-b-2 border-black">
+                  <h2 className="text-4xl font-bold text-black  text-center font-mono tracking-wider">
+                    Create an Account
+                  </h2>
+                </div>
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-4 mt-6 font-mono"
+                >
+                  <div className="flex items-center space-x-4">
+                    <label className="text-lg w-28 text-black">Fullname</label>
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={formData.fullname}
+                      onChange={handleChange}
+                      className="border border-black rounded px-3 py-1 w-full"
+                      required
+                    />
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <label className="text-lg w-28 text-black">Username</label>
+                    <input
+                      type="text"
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      className="border border-black rounded px-3 py-1 w-full"
+                      required
+                    />
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <label className="text-lg w-28 text-black">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="border border-black rounded px-3 py-1 w-full"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-black text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                  >
+                    Sign Up
+                  </button>
                 </form>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      {/* </GridLines> */}
+    </>
+  );
 };
 
-export default LoginPage;
+export default SignupPage;

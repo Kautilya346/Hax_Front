@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
 const SignupPage = () => {
+    const [fullName, setFullName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle signup logic here
+        console.log('Full Name:', fullName);
         console.log('Username:', username);
         console.log('Email:', email);
     };
@@ -18,13 +20,26 @@ const SignupPage = () => {
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
+                            <label htmlFor="fullName" className="sr-only">Full Name</label>
+                            <input
+                                id="fullName"
+                                name="fullName"
+                                type="text"
+                                required
+                                className="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#DC483A] focus:border-[#DC483A] sm:text-sm"
+                                placeholder="Full Name"
+                                value={fullName}
+                                onChange={(e) => setFullName(e.target.value)}
+                            />
+                        </div>
+                        <div>
                             <label htmlFor="username" className="sr-only">Username</label>
                             <input
                                 id="username"
                                 name="username"
                                 type="text"
                                 required
-                                className="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#DC483A] focus:border-[#DC483A] sm:text-sm"
+                                className="relative block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-[#DC483A] focus:border-[#DC483A] sm:text-sm"
                                 placeholder="Username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
