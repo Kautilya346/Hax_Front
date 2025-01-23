@@ -1,19 +1,47 @@
 import React, { useState } from "react";
 import GridLines from "react-gridlines";
+import axios from "axios"; // Import axios
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     username: "",
-    privateKey: "",
+    privateKeyHex: "",
   });
+
+  const [loading, setLoading] = useState(false); // To track loading state
+  const [error, setError] = useState(""); // To track errors after submission
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
+
+    // Set loading to true when the request starts
+    setLoading(true);
+    setError(""); // Clear any previous errors
+    console.log(formData.privateKeyHex);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Login Success:", response.data);
+      // Optionally redirect or save login info here (e.g., save token)
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("Invalid username or passkey.");
+    } finally {
+      setLoading(false); // Set loading to false when the request finishes
+    }
   };
 
   return (
@@ -59,8 +87,8 @@ const LoginPage = () => {
                     </label>
                     <input
                       type="password"
-                      name="privateKey"
-                      value={formData.privateKey}
+                      name="privateKeyHex"
+                      value={formData.privateKeyHex}
                       onChange={handleChange}
                       className="border border-black rounded px-3 py-1 w-full"
                       required
@@ -69,10 +97,14 @@ const LoginPage = () => {
                   <button
                     type="submit"
                     className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                    disabled={loading} // Disable button during loading
                   >
-                    Login
+                    {loading ? "Logging In..." : "Login"}
                   </button>
                 </form>
+                {error && (
+                  <p className="mt-4 text-center text-red-500">{error}</p>
+                )}
                 <div className="mt-4 text-center">
                   <p className="text-sm text-black">
                     Don’t have an account?{" "}
@@ -92,4 +124,5 @@ const LoginPage = () => {
     </>
   );
 };
+
 export default LoginPage;

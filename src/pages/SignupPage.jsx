@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import GridLines from "react-gridlines";
+import { Link } from "react-router-dom";
+import axios from "axios"; // Import axios
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -8,13 +10,46 @@ const SignupPage = () => {
     email: "",
   });
 
+  const [loading, setLoading] = useState(false); // To track loading state
+  const [error, setError] = useState(""); // To track errors after submission
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
+
+    // Set loading to true when the request starts
+    setLoading(true);
+    setError(""); // Clear any previous errors
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/signup",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Success:", response.data);
+
+      // Optionally clear form data after successful submission
+      setFormData({
+        fullname: "",
+        username: "",
+        email: "",
+      });
+    } catch (error) {
+      console.error("Request failed:", error);
+      setError("Network error, please check your connection.");
+    } finally {
+      setLoading(false); // Set loading to false when the request finishes
+    }
   };
 
   return (
@@ -80,19 +115,23 @@ const SignupPage = () => {
                   <button
                     type="submit"
                     className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                    disabled={loading} // Disable button during loading
                   >
-                    Sign Up
+                    {loading ? "Signing Up..." : "Sign Up"}
                   </button>
                 </form>
+                {error && (
+                  <p className="mt-4 text-center text-red-500">{error}</p>
+                )}
                 <div className="mt-4 text-center">
                   <p className="text-sm text-black">
                     Already have an account?{" "}
-                    <a
-                      href="/login"
+                    <Link
+                      to="/login"
                       className="text-[#DC483A] font-bold underline"
                     >
                       Login here
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -103,4 +142,5 @@ const SignupPage = () => {
     </>
   );
 };
+
 export default SignupPage;
