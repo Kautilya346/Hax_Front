@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GridLines from "react-gridlines";
 import { PeopleCard } from "../components/PeopleCard";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ExplorePage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const ExplorePage = () => {
       dp: "https://randomuser.me/api/portraits/men/1.jpg",
       name: "John Doe",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+      description:
+        "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
       description:
         "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
       price: "500",
@@ -105,6 +108,12 @@ const ExplorePage = () => {
     person.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const pageVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+    exit: { opacity: 0, y: -50, transition: { duration: 0.5 } },
+  };
+
   const handleClick = (person) => {
     navigate("/hire", { state: { person } });
   };
@@ -138,20 +147,17 @@ const ExplorePage = () => {
               {activePerson && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                   <div
-                    className="h-fit w-11/12 mx-auto absolute z-20 bg-[#f5f2e5] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
+                    className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#bdaa6d] via-white to-[#bdaa6d] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                     style={{ animation: "fadeIn 0.5s forwards" }}
-                    onMouseEnter={() => setActivePerson(activePerson)}
-                    onMouseLeave={() => setActivePerson(null)}
+                    onMouseEnter={() => setActivePerson(activePerson)} 
+                    onMouseLeave={() => setActivePerson(null)} 
                   >
                     <img
                       src={activePerson.mainphoto}
                       alt="Main"
                       className="w-full h-72 object-contain rounded-lg"
                     />
-                    <button
-                      onClick={() => handleClick(activePerson)}
-                      className="absolute top-4 right-4 font-ibm-flex-mono bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold"
-                    >
+                    <button  onClick={() => handleClick(activePerson)} className="absolute top-4 right-4 bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold">
                       HIRE
                     </button>
                     <div className="mt-4 flex items-center gap-4">
@@ -161,29 +167,23 @@ const ExplorePage = () => {
                         className="w-16 h-16 object-cover rounded-full"
                       />
                       <div>
-                        <h3 className="text-2xl font-ibm-flex-mono font-bold text-gray-800">
+                        <h3 className="text-2xl font-bold text-gray-800">
                           {activePerson.name}
                         </h3>
-                        <p className="text-gray-600 text-sm mt-1">
-                          {activePerson.work}
-                        </p>
+                        <p className="text-gray-600 text-sm mt-1">{activePerson.work}</p>
                       </div>
                     </div>
                     <div className="mt-2 text-wrap">
-                      <span className="font-bold">Description : </span>
-                      <span className="">{activePerson.description}</span>
+                      <span className="font-bold">Description : </span><span className="">{activePerson.description}</span>
                     </div>
                     <div className="text-gray-900 text-lg font-semibold mt-3">
                       From ₹{activePerson.price}
                     </div>
                     <div className="mt-1">
-                      <span>
-                        <span className="font-bold">Contact : </span>
-                        {activePerson.contact}
-                      </span>
+                      <span><span className="font-bold">Contact : </span>{activePerson.contact}</span>
                     </div>
                   </div>
-                </div>
+                  </div>
               )}
             </div>
           </div>
