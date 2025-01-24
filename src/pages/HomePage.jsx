@@ -65,6 +65,12 @@ const HomePage = () => {
               >
                 Explore
               </Link>
+              <Link
+                to="/addservice"
+                className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
+              >
+                AddService
+              </Link>
             </div>
 
             {/* Search Bar */}
@@ -105,7 +111,7 @@ const HomePage = () => {
               eliminates intermediaries, provides transparent payment systems
               via smart contracts, and ensures secure user authentication
               through Web3 services. The platform also introduces a reputation
-              system and dispute resolution powered by decentralized governance.
+              system and dispute resolution powered by decentralized governance.
             </p>
           </div>
         </div>
@@ -168,7 +174,7 @@ const HomePage = () => {
           </div>
 
           <p className="text-center mt-16">
-            Made with ❤️ by bunch of {" "}{" "}
+            Made with ❤️ by bunch of{" "}
             <span className=" ml-2 font-gravity text-3xl"> Adityas</span>
           </p>
         </div>
