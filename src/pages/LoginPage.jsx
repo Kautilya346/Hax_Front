@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import GridLines from "react-gridlines";
-import axios from "axios"; // Import axios
+import toast, { Toaster } from "react-hot-toast"; // Import react-hot-toast
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -8,8 +10,10 @@ const LoginPage = () => {
     privateKeyHex: "",
   });
 
-  const [loading, setLoading] = useState(false); // To track loading state
-  const [error, setError] = useState(""); // To track errors after submission
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,22 +23,26 @@ const LoginPage = () => {
     e.preventDefault();
     console.log("Login Data:", formData);
 
-    // Set loading to true when the request starts
     setLoading(true);
-    setError(""); // Clear any previous errors
-    console.log(formData.privateKeyHex);
+    setError(""); // Clear previous errors
+
     try {
-      const response = await axios.post("http://localhost:3000/auth/login",formData,
-        {withCredentials: true}
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        formData,
+        { withCredentials: true }
       );
 
       console.log("Login Success:", response.data);
-      // Optionally redirect or save login info here (e.g., save token)
+      // Show success toast
+
+      toast.success("Login Successful!");
+      // Optionally redirect or save login info here
     } catch (error) {
       console.error("Login failed:", error);
-      setError("Invalid username or passkey.");
+      toast.error("Invalid username or passkey."); // Show error toast
     } finally {
-      setLoading(false); // Set loading to false when the request finishes
+      setLoading(false);
     }
   };
 
@@ -76,7 +84,7 @@ const LoginPage = () => {
                     />
                   </div>
                   <div className="flex items-center space-x-4">
-                    <label className="text-xl font-semibold  w-28 text-black">
+                    <label className="text-xl font-semibold w-28 text-black">
                       Passkey
                     </label>
                     <input
@@ -91,7 +99,7 @@ const LoginPage = () => {
                   <button
                     type="submit"
                     className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
-                    disabled={loading} // Disable button during loading
+                    disabled={loading}
                   >
                     {loading ? "Logging In..." : "Login"}
                   </button>
@@ -115,6 +123,9 @@ const LoginPage = () => {
           </div>
         </GridLines>
       </div>
+
+      {/* Toaster component to show toasts */}
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };
