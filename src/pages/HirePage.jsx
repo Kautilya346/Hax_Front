@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import GridLines from "react-gridlines";
 import { motion } from "framer-motion";
 
@@ -15,7 +15,7 @@ const HirePage = () => {
 
   return (
     <div className="font-serif">
-      <GridLines className="h-screen grid-area" cellWidth={20} strokeWidth={1}>
+      <GridLines className="h-full grid-area" cellWidth={20} strokeWidth={1}>
         {person ? (
           <motion.div
             variants={pageVariants}
@@ -47,7 +47,9 @@ const HirePage = () => {
                   placeholder="Describe the Work that you want!"
                 ></textarea>
                 <div className="flex items-center mt-3">
-                  <p className="font-bold mx-3 mt-1 text-xl">APT {person.price}</p>
+                  <p className="font-bold mx-3 mt-1 text-xl">
+                    APT {person.price}
+                  </p>
                   <motion.button
                     className="shadow-2xl shadow-gray-900 mt-2 bg-[#73642b] text-white px-4 py-2 rounded-lg font-semibold"
                     whileHover={{ scale: 1.1 }}
@@ -59,12 +61,12 @@ const HirePage = () => {
                 </div>
               </div>
             </div>
-            </motion.div>
+          </motion.div>
         ) : (
           <p>No person data found</p>
         )}
       </GridLines>
-      </div>
+    </div>
   );
 };
 
