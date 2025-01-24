@@ -1,32 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import dinoImage from "../assets/dino.svg";
-import GridLines from "react-gridlines";
-import { FaCaretRight } from "react-icons/fa";
-
-const HomePage = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const searchInputRef = useRef(null);
-
-  useEffect(() => {
-    if (isSearchOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, []);
-
-  const handleSearchClick = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
-
-  return (
-    <div className="bg-[#f5f2e5] h-full gap-10">
-      <GridLines
-        className="grid-area"
-        cellWidth={20}                        
-        strokeWidth={1}
-        cellWidth2={20}
-      >
-        <div className="flex flex-col gap-1 border-2 border-t-0 border-black w-[90%] text-center mx-auto pb-0 m-0 relative">
+ <div className="flex flex-col gap-1 border-2 border-t-0 border-black w-[90%] text-center mx-auto pb-0 m-0 relative">
           <div className="text-center justify-center flex mb-[-50px] font-gravity text-[250px] font-bold">
             <h1 className="text-black">Free</h1>
             <span className="text-[#DC483A]">3</span>
@@ -172,9 +144,3 @@ const HomePage = () => {
             <span className=" ml-2 font-gravity text-3xl"> Adityas</span>
           </p>
         </div>
-      </GridLines>
-    </div>
-  );
-};
-
-export default HomePage;
