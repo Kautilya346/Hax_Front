@@ -256,7 +256,7 @@ const HomePage = () => {
               transition={{ duration: 1, delay: 0.5 }}
             >
               <div className="text-4xl mb-4">📄</div>
-              <h3 className="text-2xl font-bold">1-Stop Solution</h3>
+              <h3 className="text-2xl font-bold font-mono">1-Stop Solution</h3>
               <p className="mt-2">
                 Aeternity’s enchanting platform: effortlessly forge, deploy, and
                 transform your ideas into powerful smart contracts.
@@ -270,7 +270,7 @@ const HomePage = () => {
               transition={{ duration: 1, delay: 0.6 }}
             >
               <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-2xl font-bold">AI Powered Development</h3>
+              <h3 className="text-2xl font-bold font-mono">AI Powered Development</h3>
               <p className="mt-2">
                 Create smart contracts effortlessly with Aeternity. Intuitive
                 interface, Sophia language, and LLM guidance for excellence.
@@ -284,7 +284,7 @@ const HomePage = () => {
               transition={{ duration: 1, delay: 0.7 }}
             >
               <div className="text-4xl mb-4">⚙️</div>
-              <h3 className="text-2xl font-bold">Advanced Customization</h3>
+              <h3 className="text-2xl font-bold font-mono">Advanced Customization</h3>
               <p className="mt-2">
                 With Advanced Customization, you can personalize your email
                 client to suit your preferences and work style.
