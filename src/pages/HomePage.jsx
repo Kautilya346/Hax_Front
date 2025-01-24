@@ -165,7 +165,7 @@ const HomePage = () => {
             <img
               src={dinoImage}
               alt="Dinosaur"
-              className="size-20 ml-5 left-[-15px]  text-white whileInView-dino absolute bottom-[-10px]"
+              className="size-20 ml-5 left-[-15px]  text-white whileInView-dino animate-dino absolute bottom-[-10px]"
             />
           </div>
         </motion.div>
