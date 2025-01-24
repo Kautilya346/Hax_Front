@@ -45,22 +45,10 @@ const ServiceForm = () => {
     formDataToSend.append("description", formData.description);
 
     try {
-<<<<<<< HEAD
-      const response = await axios.post(
-        "http://localhost:3000/service/user",
-        formDataToSend,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-        }
-    });
-=======
       const response = await axios.post("http://localhost:3000/service/user", formDataToSend, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
->>>>>>> d08224bd75c5bb577399134dcf17b9871fdb1d3d
 
       if (response.status === 201) {
         toast.success("Service added successfully!");
@@ -68,14 +56,8 @@ const ServiceForm = () => {
         setImagePreview(null);
       }
     } catch (err) {
-<<<<<<< HEAD
-      console.error("Error:", err);
-      setError(err.response.data.message);
-      setSuccess("");
-=======
       toast.error("Failed to add service.");
       console.error("Error:", err);
->>>>>>> d08224bd75c5bb577399134dcf17b9871fdb1d3d
     }
   };
 
