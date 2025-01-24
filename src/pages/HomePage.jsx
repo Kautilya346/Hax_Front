@@ -3,6 +3,66 @@ import { Link } from "react-router-dom";
 import dinoImage from "../assets/dino.svg";
 import GridLines from "react-gridlines";
 import { FaCaretRight } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const StaircaseText = ({ text, className = "" }) => {
+  const characters = Array.from(text);
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.06, delayChildren: 0.02 * i },
+    }),
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      clipPath: "inset(0 0 0 0)",
+      transition: {
+        type: "tween",
+        ease: "easeOut",
+        duration: 1,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      clipPath: "inset(100% 0 0 0)",
+      transition: {
+        type: "tween",
+        ease: "easeIn",
+        duration: 1,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className={className}
+      whileInView="visible"
+      variants={container}
+      initial="hidden"
+    >
+      {characters.map((char, index) => (
+        <motion.span
+          key={`${char}-${index}`}
+          variants={child}
+          style={{ position: "relative" }}
+        >
+          <span style={{ visibility: "hidden" }}>{char}</span>
+          <motion.span
+            style={{
+              position: "absolute",
+              left: 0,
+            }}
+          >
+            {char === " " ? "\u00A0" : char}
+          </motion.span>
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
 
 const HomePage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -22,16 +82,24 @@ const HomePage = () => {
     <div className="bg-[#f5f2e5] h-full gap-10">
       <GridLines
         className="grid-area"
-        cellWidth={20}
-        strokeWidth={1}
-        cellWidth2={20}
+        cellWidth={30}
+        strokeWidth={2}
+        cellWidth2={30}
       >
-        <div className="flex flex-col gap-1 border-2 border-t-0 border-black w-[90%] text-center mx-auto pb-0 m-0 relative">
-          <div className="text-center justify-center flex mb-[-50px] font-gravity text-[250px] font-bold">
-            <h1 className="text-black">Free</h1>
-            <span className="text-[#DC483A]">3</span>
-            <h1 className="text-black">Lance</h1>
-          </div>
+        <motion.div className="flex flex-col gap-1 border-2 border-t-0 border-black w-[90%] text-center mx-auto pb-0 m-0 relative">
+          <motion.div
+            className="text-center justify-center flex mb-[-50px] font-gravity text-[250px] font-bold"
+            whileInView="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
+            }}
+            initial="hidden"
+          >
+            <StaircaseText text="Free" className="text-black" />
+            <StaircaseText text="3" className="text-[#DC483A]" />
+            <StaircaseText text="Lance" className="text-black" />
+          </motion.div>
 
           <div
             id="panel"
@@ -93,28 +161,53 @@ const HomePage = () => {
               </div>
             )}
           </div>
-
           <div>
             <img
               src={dinoImage}
               alt="Dinosaur"
-              className="size-20 ml-5 left-[-15px]  text-white animate-dino absolute bottom-[-10px]"
+              className="size-20 ml-5 left-[-15px]  text-white whileInView-dino animate-dino absolute bottom-[-10px]"
             />
           </div>
-        </div>
+        </motion.div>
 
-        <div className="h-[40%] border-2 border-t-0 border-black w-[90%] text-center mx-auto mb-10 pb-10">
-          <div className="border-2 border-t-0 rounded-b-md border-black w-[50%] px-5 py-2 text-center mx-auto">
-            <p className="ibm-flex-mono">
+        <motion.div
+          className="h-[40%] border-2 border-t-0 border-black w-[90%] text-center mx-auto mb-10 pb-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          animate={{ opacity: 1 }}
+          viewport={{ once: true }} // Trigger the animation only once when in view
+        >
+          <motion.div
+            className="border-2 border-t-0 rounded-b-md border-black w-[50%] px-5 py-2 text-center mx-auto"
+            initial={{ y: -50, opacity: 0, scale: 0.7 }}
+            whileInView={{
+              y: 0,
+              opacity: 1,
+              scale: 1, // Add a slight scale-up effect
+            }}
+            transition={{ duration: 0.8 }}
+            // Trigger once when fully in view
+          >
+            <motion.p
+              className="ibm-flex-mono"
+              initial={{ y: 50, opacity: 0, scale: 0.8 }}
+              whileInView={{
+                y: 0,
+                opacity: 1,
+                scale: 1, // Add a slight scale-up effect
+              }}
+              transition={{ duration: 1 }}
+            >
               Free3Lance is a decentralized freelancing platform that connects
               clients and freelancers directly using blockchain technology. It
               eliminates intermediaries, provides transparent payment systems
               via smart contracts, and ensures secure user authentication
               through Web3 services. The platform also introduces a reputation
               system and dispute resolution powered by decentralized governance.
-            </p>
-          </div>
-        </div>
+            </motion.p>
+          </motion.div>
+        </motion.div>
         <div>
           <div className="flex flex-wrap justify-around items-center gap-4 p-5">
             <div className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer">
@@ -135,48 +228,82 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+
         <div className="border-black border-t-4 pb-20 mt-5 pt-5">
-          <h2 className="text-center text-6xl font-gravity font-bold">
+          <motion.h2
+            className="text-center text-6xl font-gravity font-bold"
+            initial={{ x: -100 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             Discover Our Unique Features
-          </h2>
-          <p className="text-center text-lg mt-3">
+          </motion.h2>
+          <motion.p
+            className="text-center text-lg mt-3"
+            initial={{ y: 50, opacity: 0, scale: 0.6 }}
+            whileInView={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
             Our features are designed to enhance your productivity and
             streamline your workflow.
-          </p>
+          </motion.p>
 
           <div className="flex flex-wrap justify-around items-center gap-16 mt-10">
-            <div className="max-w-sm text-center">
+            <motion.div
+              className="max-w-sm text-center"
+              initial={{ opacity: 0, y: 100, scale: 0.6 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
               <div className="text-4xl mb-4">📄</div>
               <h3 className="text-2xl font-bold">1-Stop Solution</h3>
               <p className="mt-2">
                 Aeternity’s enchanting platform: effortlessly forge, deploy, and
                 transform your ideas into powerful smart contracts.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="max-w-sm text-center">
+            <motion.div
+              className="max-w-sm text-center"
+              initial={{ opacity: 0, y: 100, scale: 0.6 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-2xl font-bold">AI Powered Development</h3>
               <p className="mt-2">
                 Create smart contracts effortlessly with Aeternity. Intuitive
                 interface, Sophia language, and LLM guidance for excellence.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="max-w-sm text-center">
+            <motion.div
+              className="max-w-sm text-center"
+              initial={{ opacity: 0, y: 100, scale: 0.6 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
+            >
               <div className="text-4xl mb-4">⚙️</div>
               <h3 className="text-2xl font-bold">Advanced Customization</h3>
               <p className="mt-2">
                 With Advanced Customization, you can personalize your email
                 client to suit your preferences and work style.
               </p>
-            </div>
+            </motion.div>
           </div>
 
-          <p className="text-center mt-16">
-            Made with ❤️ by bunch of{" "}
-            <span className=" ml-2 font-gravity text-3xl"> Adityas</span>
-          </p>
+          <motion.p
+            className="text-center mt-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.9 }}
+          >
+            Made with ❤️ by bunch of
+            <span className="ml-2 font-gravity text-3xl">
+              {" "}
+              Adityas and mano
+            </span>
+          </motion.p>
         </div>
       </GridLines>
     </div>

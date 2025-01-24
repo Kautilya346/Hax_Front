@@ -7,6 +7,7 @@ import SearchPage from "./pages/SearchPage";
 import ExplorePage from "./pages/ExplorePage";
 import Navbar from "./pages/Navbar";
 import ProfilePage from "./pages/ProfilePage";
+import TransactionPage from "./pages/TransactionPage";
 
 import ServiceForm from "./pages/ServiceForm";
 import HirePage from "./pages/HirePage";
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/addservice" element={<ServiceForm />} />
           <Route path="/profile" element={<ProfilePage/>} />
+          <Route path="/transact" element={<TransactionPage/>}/>
         </Routes>
     </Router>
   );

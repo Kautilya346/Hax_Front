@@ -45,6 +45,7 @@ const ServiceForm = () => {
     }
 
     const formDataToSend = new FormData();
+    console.log(formData);
     formDataToSend.append("title", formData.title);
     formDataToSend.append("price", formData.price);
     formDataToSend.append("image", formData.image);
@@ -58,9 +59,8 @@ const ServiceForm = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
-          },
         }
-      );
+    });
 
       if (response.status === 201) {
         toast.success("Service added successfully!");
@@ -73,7 +73,9 @@ const ServiceForm = () => {
         setImagePreview(null);
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong.");
+      console.error("Error:", err);
+      setError(err.response.data.message);
+      setSuccess("");
     }
   };
 
@@ -173,4 +175,4 @@ const ServiceForm = () => {
   );
 };
 
-export default ServiceForm;
+export default ServiceForm;
