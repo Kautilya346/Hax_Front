@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import banner from "../assets/banner.png";
 import dp from "../assets/dp.jpg";
 import { FaPaste } from "react-icons/fa";
 
-
 const ProfilePage = () => {
+  const [copied, setCopied] = useState(false);
+  const publicKey = "your-public-key-here"; // Replace this with the actual public key
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(publicKey).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    });
+  };
+
   return (
     <div className="bg-[#f5f2e5] min-h-screen font-sans text-black">
       {/* Banner Section */}
@@ -16,32 +25,34 @@ const ProfilePage = () => {
       </div>
 
       {/* Profile Section */}
-      <div className="flex flex-col p-10 gap-6 border-b-2 mb-10">
-        
+      <div className="flex flex-col p-10 gap-6 border-b-2 border-black">
         <div className="flex gap-10">
           {/* Profile Picture */}
-        <div className="relative">
-          <img
-            src={dp}
-            alt="profile"
-            className="w-36 h-36 border-4 border-black rounded-full object-cover"
-          />
-          <div className="absolute bottom-0 left-0 bg-[#DC483A] rounded-full w-6 h-6 border-2 border-black"></div>
-        </div>
-
-        {/* Name and Share Button */}
-        <div className="flex flex-col justify-center">
-          <h1 className="text-4xl font-bold font-gravity">Aditya Srivastava</h1>
-          <div className="flex  gap-4 mt-2">
-            <div className="px-4 py-2 bg-[#f5f2e5] border-2 border-black rounded-md flex justify-center items-center gap-2">
-              <div>public key</div>
-              <FaPaste className="cursor-pointer text-[#dc483a]"/>
-            </div> 
-            <button className="px-4 py-2 bg-[#DC483A] text-white font-gravity text-xl rounded-md border-2 border-black">
-              Share
-            </button>
+          <div className="relative">
+            <img
+              src={dp}
+              alt="profile"
+              className="w-36 h-36 border-4 border-black rounded-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 bg-[#DC483A] rounded-full w-6 h-6 border-2 border-black"></div>
           </div>
-        </div>
+
+          {/* Name and Share Button */}
+          <div className="flex flex-col justify-center">
+            <h1 className="text-4xl font-bold font-gravity">Aditya Srivastava</h1>
+            <div className="flex gap-4 mt-2">
+              <div className="px-4 py-2 bg-[#f5f2e5] border-2 border-black rounded-md flex justify-center items-center gap-2">
+                <div>{publicKey}</div>
+                <FaPaste 
+                  className="cursor-pointer text-[#dc483a]"
+                  onClick={handleCopy}
+                />
+              </div>
+              <button className="px-4 py-2 bg-[#d5655b] hover:bg-[#df3829] text-white font-gravity text-xl rounded-md border-2 border-black">
+                Share
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Description */}
@@ -51,7 +62,7 @@ const ProfilePage = () => {
       </div>
 
       {/* Active Projects Section */}
-      <div className="p-10 border-t-2 mt-5 border-black">
+      <div className="p-10 border-t-2 mt-2 border-black">
         <h2 className="text-3xl font-bold mb-6 font-gravity">Active Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[1, 2, 3, 4].map((project, index) => (
@@ -66,10 +77,23 @@ const ProfilePage = () => {
               <p className="text-sm">
                 A brief description of the service offered goes here. Add more details to make it engaging.
               </p>
+              {/* Project Completed Button */}
+              <button
+                className="mt-4 px-4 py-2 bg-[#82db85] text-white font-semibold rounded-md border-2 border-black hover:bg-[#45a049] transition-all"
+              >
+                Project Completed
+              </button>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Displaying Copy Status */}
+      {copied && (
+        <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-md shadow-md">
+          Public Key Copied!
+        </div>
+      )}
     </div>
   );
 };

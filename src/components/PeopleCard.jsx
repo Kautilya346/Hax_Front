@@ -6,7 +6,7 @@ export const PeopleCard = ({ dp, name, work, price, mainphoto,description,contac
   const handleMouseEnter = () => {
     const timeout = setTimeout(() => {
       setActivePerson({ dp, name, work, price, mainphoto,description,contact });
-    }, 1500); 
+    }, 500); 
     setHoverTimeout(timeout);
   };
 
@@ -17,7 +17,7 @@ export const PeopleCard = ({ dp, name, work, price, mainphoto,description,contac
 
   return (
     <div
-      className="group w-1/5 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-move"
+      className="group w-1/5 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
