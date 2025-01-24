@@ -4,7 +4,6 @@ import axios from "axios";
 const ServiceForm = () => {
   const [formData, setFormData] = useState({
     title: "",
-    user: "",
     price: "",
     image: null,
     description: "",
@@ -26,7 +25,6 @@ const ServiceForm = () => {
 
     if (
       !formData.title ||
-      !formData.user ||
       !formData.price ||
       !formData.image ||
       !formData.description
@@ -36,8 +34,8 @@ const ServiceForm = () => {
     }
 
     const formDataToSend = new FormData();
+    console.log(formData);
     formDataToSend.append("title", formData.title);
-    formDataToSend.append("user", formData.user);
     formDataToSend.append("price", formData.price);
     formDataToSend.append("image", formData.image);
     formDataToSend.append("description", formData.description);
@@ -47,23 +45,25 @@ const ServiceForm = () => {
         "http://localhost:3000/service/user",
         formDataToSend,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
         }
-      );
+    });
 
       if (response.status === 201) {
         setSuccess("Service added successfully!");
         setError("");
         setFormData({
           title: "",
-          user: "",
           price: "",
           image: null,
           description: "",
         });
       }
     } catch (err) {
-      setError("Failed to add service. Try again later.");
+      console.error("Error:", err);
+      setError(err.response.data.message);
       setSuccess("");
     }
   };
@@ -85,18 +85,6 @@ const ServiceForm = () => {
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter service title"
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700 font-medium">User ID</label>
-          <input
-            type="text"
-            name="user"
-            value={formData.user}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter user ID"
           />
         </div>
 
