@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const PeopleCard = ({ dp, name, work, price, mainphoto }) => {
+export const PeopleCard = ({ dp, name, work, price, mainphoto,description,contact, setActivePerson }) => {
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+  const handleMouseEnter = () => {
+    const timeout = setTimeout(() => {
+      setActivePerson({ dp, name, work, price, mainphoto,description,contact });
+    }, 1500); 
+    setHoverTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeout);
+    setActivePerson(null);
+  };
+
   return (
-    <div className="group w-1/5 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:animate-flag hover:shadow-lg">
+    <div
+      className="group w-1/5 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-move"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <img
         src={mainphoto}
         alt="Profile Work"
