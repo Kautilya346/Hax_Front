@@ -9,6 +9,7 @@ import Navbar from "./pages/Navbar";
 import ProfilePage from "./pages/ProfilePage";
 
 import ServiceForm from "./pages/ServiceForm";
+import HirePage from "./pages/HirePage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/hire" element={<HirePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/addservice" element={<ServiceForm />} />

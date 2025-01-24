@@ -159,7 +159,7 @@ const ExplorePage = () => {
                       <span className="font-bold">Description : </span><span className="">{activePerson.description}</span>
                     </div>
                     <div className="text-gray-900 text-lg font-semibold mt-3">
-                      From ₹{activePerson.price}
+                      From APT{activePerson.price}
                     </div>
                     <div className="mt-1">
                       <span><span className="font-bold">Contact : </span>{activePerson.contact}</span>
