@@ -14,16 +14,13 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <ProfilePage />
+      {/* <ProfilePage /> */}
       <Routes>
-        <Navbar />
-        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/explore" element={<ExplorePage />} />
-        </Routes>
         <Route path="/addservice" element={<ServiceForm />} />
       </Routes>
     </Router>
