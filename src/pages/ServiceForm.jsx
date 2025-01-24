@@ -59,10 +59,6 @@ const ServiceForm = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
-<<<<<<< HEAD
-=======
-          },
->>>>>>> 9323b006ab174c3a17361ba4c9339426bba92248
         }
     });
 
@@ -77,13 +73,9 @@ const ServiceForm = () => {
         setImagePreview(null);
       }
     } catch (err) {
-<<<<<<< HEAD
       console.error("Error:", err);
       setError(err.response.data.message);
       setSuccess("");
-=======
-      toast.error(err.response?.data?.message || "Something went wrong.");
->>>>>>> 9323b006ab174c3a17361ba4c9339426bba92248
     }
   };
 
@@ -116,19 +108,6 @@ const ServiceForm = () => {
             />
           </div>
 
-<<<<<<< HEAD
-        <div>
-          <label className="block text-gray-700 font-medium">Price</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter price"
-          />
-        </div>
-=======
           {/* Price */}
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
@@ -158,7 +137,6 @@ const ServiceForm = () => {
               placeholder="Enter service description"
             ></textarea>
           </div>
->>>>>>> 9323b006ab174c3a17361ba4c9339426bba92248
 
           {/* Upload Image */}
           <div>
