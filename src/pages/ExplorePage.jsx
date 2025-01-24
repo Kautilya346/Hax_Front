@@ -159,7 +159,7 @@ const ExplorePage = () => {
                       alt="Main"
                       className="mx-auto w-72 h-72 object-cover rounded-xl"
                     />
-                    <button  onClick={() => handleClick(activePerson)} className="absolute top-4 right-4 bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold">
+                    <button  onClick={() => handleClick(activePerson)} className="absolute top-4 right-4 bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300">
                       HIRE
                     </button>
                     <div className="mt-4 flex items-center gap-4">
