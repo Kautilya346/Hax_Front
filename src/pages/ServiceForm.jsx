@@ -107,37 +107,6 @@ const ServiceForm = () => {
               />
             </motion.div>
 
-<<<<<<< HEAD
-          {/* Price */}
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Price
-            </label>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              placeholder="Enter price"
-            />
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Description
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows="4"
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              placeholder="Enter service description"
-            ></textarea>
-          </div>
-=======
             <motion.div whileHover={{ scale: 1.02 }}>
               <label className="block text-black font-bold mb-1">Price</label>
               <input
@@ -161,7 +130,6 @@ const ServiceForm = () => {
                 placeholder="Enter service description"
               ></textarea>
             </motion.div>
->>>>>>> d08224bd75c5bb577399134dcf17b9871fdb1d3d
 
             <motion.div whileHover={{ scale: 1.02 }}>
               <label className="block text-black font-bold mb-1">Upload Image</label>
