@@ -13,7 +13,7 @@ const HirePage = () => {
   };
 
   return (
-    <div className="font-serif">
+    <div className="font-mono h-auto">
       <GridLines className="h-full grid-area" cellWidth={20} strokeWidth={1}>
         {person ? (
           <motion.div
@@ -25,25 +25,26 @@ const HirePage = () => {
             <h1 className="text-4xl px-16 py-5 font-bold font-gravity ml-5">
               {person.name}
             </h1>
-            <div className="flex justify-between px-16 gap-44 ml-5">
-              <div className="flex flex-col items-center">
+            <h1 className="text-2xl px-16 font-gravity ml-5 mb-5">{person.domain[0].toUpperCase() + person.domain.slice(1)}</h1>
+            <div className="flex justify-between px-16 gap-44 ml-5 pb-5">
+              <div className="w-2/3 flex flex-col items-center">
                 <motion.img
-                  className="w-2/3 rounded-2xl shadow-2xl shadow-gray-900 mb-10"
+                  className="w-2/3 rounded-2xl shadow-xl shadow-gray-500 mb-10"
                   src={person.dp}
                   alt="DP"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                 />
-                <p className="mt-2 text-2xl ">{person.description}</p>
-                <p className="mt-4 text-lg ">Contact Me : {person.contact}</p>
+                <p className="mt-1 text-2xl">{person.description}</p>
+                <p className="mt-4 text-lg font-bold">Contact : {person.contact}</p>
               </div>
-              <div className="w-2/3 h-fit mr-5 bg-white rounded-2xl p-5">
+              <div className="w-2/5 h-fit mr-5 bg-white rounded-2xl p-5">
                 <h1 className="text-4xl font-gravity tracking-wide text-center">Work Details</h1>
                 <hr className='my-3 border border-black'/>
 
                 <textarea
-                  className="w-full h-2/3 p-3 outline-none placeholder-gray-500 bg-[#f5f2e5] text-gray-900 rounded-xl text-xl"
+                  className="w-full h-44 p-3 outline-none placeholder-gray-500 bg-[#f5f2e5] text-gray-900 rounded-xl text-xl"
                   name="description"
                   id=""
                   placeholder="Describe your work!"

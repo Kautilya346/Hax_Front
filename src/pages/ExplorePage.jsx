@@ -8,6 +8,7 @@ const ExplorePage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [activePerson, setActivePerson] = useState(null);
+  const [domainFilter, setDomainFilter] = useState("");
 
   const peopledata = [
     {
@@ -15,6 +16,7 @@ const ExplorePage = () => {
       name: "John Doe",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description:"I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain: "web development",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
       contact: "1234567890",
@@ -24,6 +26,7 @@ const ExplorePage = () => {
       name: "Aditya Bajpayee",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain: "web development",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/women/2.jpg",
       contact: "1234567890",
@@ -33,6 +36,7 @@ const ExplorePage = () => {
       name: "Srivas",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain:"app development",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
       contact: "1234567890",
@@ -42,6 +46,7 @@ const ExplorePage = () => {
       name: "Srivas",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain:"app development",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
       contact: "1234567890",
@@ -51,6 +56,7 @@ const ExplorePage = () => {
       name: "Kumar Ji",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "Hi, I'm Aditya, a passionate developer with expertise in the MERN stack. I specialize in creating dynamic, responsive websites with a focus on performance and user experience. I'm always eager to learn new technologies and love solving complex problems. Let's build something amazing together!",
+      domain: "web development",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/men/5.jpg",
       contact: "1234567890",
@@ -60,6 +66,7 @@ const ExplorePage = () => {
       name: "Mandav Para",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain:"video editing",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/men/6.jpg",
       contact: "1234567890",
@@ -69,6 +76,7 @@ const ExplorePage = () => {
       name: "Kautila N",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web developer with 5 years of experience in web development. I have worked with many clients and have a good track record.",
+      domain:"graphic designing",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/men/7.jpg",
       contact: "1234567890",
@@ -78,6 +86,7 @@ const ExplorePage = () => {
       name: "Nath Godam",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain:"graphic designing",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/men/8.jpg",
       contact: "1234567890",
@@ -87,6 +96,7 @@ const ExplorePage = () => {
       name: "Jai Jinendra",
       work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
       description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+      domain:"video editing",
       price: "500",
       mainphoto: "https://randomuser.me/api/portraits/women/1.jpg",
       contact: "1234567890",
@@ -94,7 +104,7 @@ const ExplorePage = () => {
   ];
 
   const filteredPeople = peopledata.filter((person) =>
-    person.name.toLowerCase().includes(searchTerm.toLowerCase())
+    person.name.toLowerCase().includes(searchTerm.toLowerCase()) && person.domain.includes(domainFilter)
   );
 
   const pageVariants = {
@@ -110,7 +120,7 @@ const ExplorePage = () => {
   return (
     <div className="h-full w-screen">
       <div className="bg-[#f5f2e5] h-full w-screen">
-        <GridLines className="h-screen grid-area" cellWidth={20} strokeWidth={1}>
+        <GridLines className="min-h-screen h-full grid-area" cellWidth={20} strokeWidth={1}>
         <motion.div
             variants={pageVariants}
             initial="hidden"
@@ -120,14 +130,27 @@ const ExplorePage = () => {
           <div className="flex justify-center items-center ">
             <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">Experts Available</h1>
           </div>
-          <div className="flex flex-col items-center py-5 px-4">
-            <input
-              type="text"
-              placeholder="Search by name"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/5 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
-            />
+          <div className="flex flex-col items-center py-5 px-4 font-mono">
+            <div className="flex justify-between w-2/3">
+              <input
+                type="text"
+                placeholder="Search by name"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/3 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
+              />
+              <select
+                className=" w-fit border font-serif h-12 bg-[#fc8277] border-gray-300 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
+                onChange={(event) => setDomainFilter(event.target.value)}
+                defaultValue=""
+              >
+                <option value="">All Experts</option>
+                <option value="web development">Web Development</option>
+                <option value="app development">App Development</option>
+                <option value="video editing">Video Editing</option>
+                <option value="graphic designing">Graphic Designing</option>
+              </select>
+            </div>
             <div className="relative w-full flex flex-wrap justify-center items-center gap-5 max-w-8xl">
               {filteredPeople.length === 0 ? (
                 <p className="mt-20 text-center text-7xl font-gravity animate-bounce">No results found</p>
@@ -142,6 +165,7 @@ const ExplorePage = () => {
                     mainphoto={person.mainphoto}
                     description={person.description}
                     contact={person.contact}
+                    domain={person.domain}
                     setActivePerson={setActivePerson}
                   />
                 ))
@@ -149,7 +173,7 @@ const ExplorePage = () => {
               {activePerson && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                   <div
-                    className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#bdaa6d] via-white to-[#bdaa6d] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
+                    className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                     style={{ animation: "fadeIn 0.5s forwards" }}
                     onMouseEnter={() => setActivePerson(activePerson)} 
                     onMouseLeave={() => setActivePerson(null)} 
@@ -159,7 +183,7 @@ const ExplorePage = () => {
                       alt="Main"
                       className="mx-auto w-72 h-72 object-cover rounded-xl"
                     />
-                    <button  onClick={() => handleClick(activePerson)} className="absolute top-4 right-4 bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300">
+                    <button  onClick={() => handleClick(activePerson)} className="absolute top-4 right-4 bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300">
                       HIRE
                     </button>
                     <div className="mt-4 flex items-center gap-4">
@@ -172,7 +196,7 @@ const ExplorePage = () => {
                         <h3 className="text-2xl font-bold text-gray-800">
                           {activePerson.name}
                         </h3>
-                        <p className="text-gray-600 text-sm mt-1">{activePerson.work}</p>
+                        <p className="text-gray-800 text-sm mt-1">{activePerson.work}</p>
                       </div>
                     </div>
                     <div className="mt-2 text-wrap">
