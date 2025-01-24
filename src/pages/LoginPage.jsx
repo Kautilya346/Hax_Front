@@ -24,14 +24,8 @@ const LoginPage = () => {
     setError(""); // Clear any previous errors
     console.log(formData.privateKeyHex);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/login",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await axios.post("http://localhost:3000/auth/login",formData,
+        {withCredentials: true}
       );
 
       console.log("Login Success:", response.data);

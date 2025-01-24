@@ -12,15 +12,13 @@ module.exports = {
         gravity: ['fs-gravity'], // Add custom font here
       },
       animation: {
-        flag: "flag 1s ease-in-out infinite",
+        flag: "flag 2s",
       },
       keyframes: {
         flag: {
-          //rotate the image
-          "0%, 100%": { transform: "rotate(0deg)" },
-          "25%": { transform: "rotate(1deg)" },
-          "50%": { transform: "rotate(-1deg)" },
-          "75%": { transform: "rotate(1deg)" },
+          "0%": { transform : "scale(1)" },
+          "50%": { transform : "scale(1.1)" },
+          "100%": { transform : "scale(1.5)" },
         },
       },
     },
