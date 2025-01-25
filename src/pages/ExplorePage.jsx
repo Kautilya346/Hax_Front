@@ -3,6 +3,7 @@ import GridLines from "react-gridlines";
 import { PeopleCard } from "../components/PeopleCard";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ThreeCircles } from "react-loader-spinner";
 
 const ExplorePage = () => {
   const navigate = useNavigate();
@@ -11,8 +12,9 @@ const ExplorePage = () => {
   const [domainFilter, setDomainFilter] = useState("");
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Function to fetch services
     const fetchServices = async () => {
       try {
         const response = await fetch("http://localhost:3000/service/users");
@@ -21,24 +23,29 @@ const ExplorePage = () => {
         }
         const data = await response.json();
         setServices(data.services);
-        // Update state with the fetched services
       } catch (error) {
-        setError(error.message); // Set error if any
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchServices();
-
-    console.log("hiiii");
-    // Call the function to fetch services when the component mounts
   }, []);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <ThreeCircles visible={true} height="100" width="100" color="#DC483A" ariaLabel="three-circles-loading" />
+      </div>
+    );
+  }
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   const peopledata = services.map((service) => ({
-    userid: service.user._id, // Adding the id field from the original object
+    userid: service.user._id,
     dp: service.image,
     name: service.user.username,
     work: service.title,
@@ -53,9 +60,7 @@ const ExplorePage = () => {
 
 
   const filteredPeople = peopledata.filter(
-    (person) =>
-      person.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      person.domain.includes(domainFilter)
+    (person) => person.name.toLowerCase().includes(searchTerm.toLowerCase()) && person.domain.includes(domainFilter)
   );
 
   const pageVariants = {
@@ -72,21 +77,10 @@ const ExplorePage = () => {
   return (
     <div className="h-full w-screen">
       <div className="bg-[#f5f2e5] h-full w-screen">
-        <GridLines
-          className="min-h-screen h-full grid-area"
-          cellWidth={20}
-          strokeWidth={1}
-        >
-          <motion.div
-            variants={pageVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <div className="flex justify-center items-center ">
-              <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">
-                Experts Available
-              </h1>
+        <GridLines className="min-h-screen h-full grid-area" cellWidth={20} strokeWidth={1}>
+          <motion.div variants={pageVariants} initial="hidden" animate="visible" exit="exit">
+            <div className="flex justify-center items-center">
+              <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">Experts Available</h1>
             </div>
             <div className="flex flex-col items-center py-5 px-4 font-mono">
               <div className="flex justify-between w-2/3">
@@ -111,9 +105,7 @@ const ExplorePage = () => {
               </div>
               <div className="relative w-full flex flex-wrap justify-center items-center gap-5 max-w-8xl">
                 {filteredPeople.length === 0 ? (
-                  <p className="mt-20 text-center text-7xl font-gravity animate-bounce">
-                    No results found
-                  </p>
+                  <p className="mt-20 text-center text-7xl font-gravity animate-bounce">No results found</p>
                 ) : (
                   filteredPeople.map((person, index) => (
                     <PeopleCard
@@ -139,11 +131,15 @@ const ExplorePage = () => {
                       onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
                     >
+<<<<<<< HEAD
                       <img
                         src={activePerson.mainphoto}
                         alt="Main"
                         className="mx-auto w-72 h-72 object-cover rounded-xl border-2 border-black"
                       />
+=======
+                      <img src={activePerson.mainphoto} alt="Main" className="mx-auto w-72 h-72 object-cover rounded-xl" />
+>>>>>>> 5e6d0a099f036789ed631c603a544ec588cb2735
                       <button
                         onClick={() => handleClick(activePerson)}
                         className="absolute top-4 right-4 bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300"
@@ -151,27 +147,25 @@ const ExplorePage = () => {
                         HIRE
                       </button>
                       <div className="mt-4 flex items-center gap-4">
+<<<<<<< HEAD
                         <img
                           src={activePerson.dp}
                           alt="DP"
                           className="w-16 h-16 object-cover rounded-full border-black border-2x"
                         />
+=======
+                        <img src={activePerson.dp} alt="DP" className="w-16 h-16 object-cover rounded-full" />
+>>>>>>> 5e6d0a099f036789ed631c603a544ec588cb2735
                         <div>
-                          <h3 className="text-2xl font-bold text-gray-800">
-                            {activePerson.name}
-                          </h3>
-                          <p className="text-gray-800 text-sm mt-1">
-                            {activePerson.work}
-                          </p>
+                          <h3 className="text-2xl font-bold text-gray-800">{activePerson.name}</h3>
+                          <p className="text-gray-800 text-sm mt-1">{activePerson.work}</p>
                         </div>
                       </div>
                       <div className="mt-2 text-wrap">
                         <span className="font-bold">Description : </span>
-                        <span className="">{activePerson.description}</span>
+                        <span>{activePerson.description}</span>
                       </div>
-                      <div className="text-gray-900 text-lg font-semibold mt-3">
-                        Price : APT{activePerson.price}
-                      </div>
+                      <div className="text-gray-900 text-lg font-semibold mt-3">Price : APT{activePerson.price}</div>
                       <div className="mt-1">
                         <span>
                           <span className="font-bold">Contact : </span>
