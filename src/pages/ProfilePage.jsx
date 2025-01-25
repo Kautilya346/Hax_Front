@@ -53,7 +53,14 @@ const ProfilePage = () => {
                   onClick={handleCopy}
                 />
               </div>
-              <button className="px-4 py-2 bg-[#d5655b] hover:bg-[#df3829] text-white font-gravity text-xl rounded-md border-2 border-black">
+              <button
+                className="relative px-4 py-2 bg-[#d5655b] text-white font-gravity text-xl rounded-md border-2 border-black 
+  shadow-[0_4px_0_#a9463d,0_8px_0_#752e28] 
+  transition-all duration-300 ease-in-out transform-gpu 
+  hover:-translate-y-1 hover:shadow-[0_6px_0_#a9463d,0_12px_0_#752e28] hover:bg-[#df3829] 
+  active:translate-y-2 active:shadow-none 
+  before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:scale-x-0 before:transition-transform before:duration-500 before:origin-left hover:before:scale-x-100"
+              >
                 Share
               </button>
             </div>
@@ -61,7 +68,7 @@ const ProfilePage = () => {
         </div>
 
         {/* Description */}
-        <div className="w-[70%] text-lg">
+        <div className="w-[70%] font-mono text-lg">
           Free3Lance is a decentralized freelancing platform that connects
           clients and freelancers directly using blockchain technology. It
           eliminates intermediaries, provides transparent payment systems via
@@ -86,12 +93,19 @@ const ProfilePage = () => {
                 <h3 className="text-xl font-bold">Service {project}</h3>
                 <span className="text-sm font-medium">$Price</span>
               </div>
-              <p className="text-sm">
+              <p className="text-sm font-mono">
                 A brief description of the service offered goes here. Add more
                 details to make it engaging.
               </p>
               {/* Project Completed Button */}
-              <button className="mt-4 w-full px-4 py-2 bg-[#82db85] text-white font-semibold rounded-md border-2 border-black hover:bg-[#45a049] transition-all">
+              <button
+                className="relative mt-4 w-full px-4 py-2 bg-[#82db85] text-white font-semibold rounded-md border-2 border-black 
+  shadow-[0_4px_0_#45a049,0_8px_0_#2c6b2f] 
+  transition-all duration-300 ease-in-out transform-gpu 
+  hover:-translate-y-1 hover:shadow-[0_6px_0_#45a049,0_12px_0_#2c6b2f] hover:brightness-95 
+  active:translate-y-2 active:shadow-none active:bg-[#6fb874] 
+  before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:scale-x-0 before:transition-transform before:duration-500 before:origin-left hover:before:scale-x-100"
+              >
                 Project Completed
               </button>
             </div>
