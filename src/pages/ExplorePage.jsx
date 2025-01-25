@@ -21,14 +21,14 @@ const ExplorePage = () => {
         }
         const data = await response.json();
         setServices(data.services);
-        console.log(services); // Update state with the fetched services
+        // Update state with the fetched services
       } catch (error) {
         setError(error.message); // Set error if any
       }
     };
 
     fetchServices();
-    console.log(services);
+
     console.log("hiiii");
     // Call the function to fetch services when the component mounts
   }, []);
@@ -40,14 +40,16 @@ const ExplorePage = () => {
   const peopledata = services.map((service) => ({
     userid: service.user._id, // Adding the id field from the original object
     dp: service.image,
-    name: service.title,
-    work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+    name: service.user.username,
+    work: service.title,
     domain: "web development",
     description: service.description,
     price: service.price.toString(),
-    mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
+    mainphoto: service.image,
     contact: "1234567890", // Example contact field
   }));
+
+  console.log(peopledata);
 
   // const peopledata = [
   //   {
@@ -164,6 +166,7 @@ const ExplorePage = () => {
   };
 
   const handleClick = (person) => {
+    console.log(person);
     navigate("/hire", { state: { person } });
   };
 
@@ -216,6 +219,7 @@ const ExplorePage = () => {
                   filteredPeople.map((person, index) => (
                     <PeopleCard
                       key={index}
+                      userid={person.userid}
                       dp={person.dp}
                       name={person.name}
                       work={person.work}

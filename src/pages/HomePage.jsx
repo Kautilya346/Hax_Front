@@ -121,12 +121,17 @@ const HomePage = () => {
               >
                 Signup
               </Link>
-              <button
+              {/* <button
                 onClick={handleSearchClick}
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
               >
                 Search
-              </button>
+              </button> */}
+              <Link to="/profile" className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
+              >
+              Profile
+              </Link>
+
               <Link
                 to="/explore"
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"

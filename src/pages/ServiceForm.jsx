@@ -10,6 +10,8 @@ const ServiceForm = () => {
     price: "",
     image: null,
     description: "",
+    domain: "",
+    contact: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -43,7 +45,9 @@ const ServiceForm = () => {
       !formData.title ||
       !formData.price ||
       !formData.image ||
-      !formData.description
+      !formData.description ||
+      !formData.domain ||
+      !formData.contact
     ) {
       toast.error("All fields are required.");
       return;
@@ -59,6 +63,8 @@ const ServiceForm = () => {
     formDataToSend.append("price", formData.price);
     formDataToSend.append("image", formData.image);
     formDataToSend.append("description", formData.description);
+    formDataToSend.append("domain", formData.domain);
+    formDataToSend.append("contact", formData.contact.toString());
 
     try {
       const response = await axios.post(
@@ -72,7 +78,14 @@ const ServiceForm = () => {
 
       if (response.status === 201) {
         toast.success("Service added successfully!");
-        setFormData({ title: "", price: "", image: null, description: "" });
+        setFormData({
+          title: "",
+          price: "",
+          image: null,
+          description: "",
+          domain: "",
+          contact: "",
+        });
         setImagePreview(null);
       }
     } catch (err) {
@@ -126,6 +139,36 @@ const ServiceForm = () => {
                 className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
                 placeholder="Enter price"
                 min="1"
+              />
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <label className="block text-black font-bold mb-1">Domain</label>
+              <select
+                name="domain"
+                value={formData.domain}
+                onChange={handleChange}
+                className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
+              >
+                <option value="">Select domain</option>
+                <option value="Web Development">Web Development</option>
+                <option value="App Development">App Development</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Graphic Designing">Graphic Designing</option>
+              </select>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <label className="block text-black font-bold mb-1">
+                Contact Number
+              </label>
+              <input
+                type="text"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
+                placeholder="Enter contact number"
               />
             </motion.div>
 

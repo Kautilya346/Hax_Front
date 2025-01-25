@@ -24,17 +24,32 @@ const HirePage = () => {
       return;
     }
 
-    console.log("Hiiii", person, description);
     setLoading(true);
-
+    console.log("hiiiiiiiiiiiiiiiiiiiiii");
+    console.log(person);
+    console.log(person.userid);
+    console.log(person.price);
+    console.log(description);
     try {
       // Make POST request to backend to create the project
-      const response = await axios.post("http://localhost:3000/project", {
-        user2: person._id, // Assuming person._id is the freelancer's ID
-        price: person.price, // Price associated with the freelancer
-        description, // Description the employer entered
-      });
+      const response = await axios.post(
+        "http://localhost:3000/project",
+        {
+          user2: person.userid, // Freelancer's ID
+          price: person.price, // Price associated with the freelancer
+          description, // Description entered by the employer
+        },
+        {
+          withCredentials: true, // Enable credentials for cross-origin requests
+          headers: {
+            "Content-Type": "application/json", // Specify content type
+            // You can also add an Authorization header if needed
+            // 'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
 
+      console.log("byyyyyy");
       console.log("Project Created:", response.data);
       alert("Project successfully created!");
       setDescription(""); // Reset the description field after success
@@ -59,8 +74,12 @@ const HirePage = () => {
             <h1 className="text-4xl px-16 py-5 font-bold font-gravity ml-5">
               {person.name}
             </h1>
-            <div className="flex justify-between px-16 gap-44 ml-5">
-              <div className="flex flex-col items-center">
+            <h1 className="text-2xl px-16 font-gravity ml-5 mb-5">
+              {person.domain[0].toUpperCase() + person.domain.slice(1)}
+            </h1>
+
+            <div className="flex justify-between px-16 gap-44 ml-5 pb-5 ">
+              <div className="w-3/5 flex flex-col items-center ">
                 <motion.img
                   className="w-2/3 rounded-2xl shadow-xl shadow-gray-500 mb-10"
                   src={person.dp}
@@ -69,8 +88,10 @@ const HirePage = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                 />
-                <p className="mt-2 text-2xl ">{person.description}</p>
-                <p className="mt-4 text-lg ">Contact Me : {person.contact}</p>
+                <p className="mt-1 text-2xl ">{person.description}</p>
+                <p className="mt-4 text-lg font-bold">
+                  Contact : {person.contact}
+                </p>
               </div>
               <div className="w-2/3 h-fit mr-5 bg-white rounded-2xl p-5">
                 <h1 className="text-4xl font-gravity tracking-wide text-center">
@@ -79,7 +100,7 @@ const HirePage = () => {
                 <hr className="my-3 border border-black" />
 
                 <textarea
-                  className="w-full h-2/3 p-3 outline-none placeholder-gray-500 bg-[#f5f2e5] text-gray-900 rounded-xl text-xl"
+                  className="w-full h-44 p-3 outline-none placeholder-gray-500 bg-[#f5f2e5] text-gray-900 rounded-xl text-xl"
                   name="description"
                   id=""
                   value={description}
