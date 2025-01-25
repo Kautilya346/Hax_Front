@@ -44,7 +44,7 @@ const HirePage = () => {
           headers: {
             "Content-Type": "application/json", // Specify content type
             // You can also add an Authorization header if needed
-            // 'Authorization': Bearer ${token},
+            // 'Authorization': `Bearer ${token}`,
           },
         }
       );
@@ -79,7 +79,7 @@ const HirePage = () => {
             </h1>
 
             <div className="flex justify-between px-16 gap-44 ml-5 pb-5 ">
-              <div className="w-2/3 flex flex-col items-center ">
+              <div className="w-3/5 flex flex-col items-center ">
                 <motion.img
                   className="w-2/3 rounded-2xl shadow-xl shadow-gray-500 mb-10"
                   src={person.dp}
@@ -93,7 +93,7 @@ const HirePage = () => {
                   Contact : {person.contact}
                 </p>
               </div>
-              <div className="w-2/5 h-fit mr-5 bg-white rounded-2xl p-5">
+              <div className="w-2/3 h-fit mr-5 bg-white rounded-2xl p-5">
                 <h1 className="text-4xl font-gravity tracking-wide text-center">
                   Work Details
                 </h1>

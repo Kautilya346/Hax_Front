@@ -34,10 +34,10 @@ const LoginPage = () => {
       );
       console.log("Login Success:", response.data);
       toast.success("Login Successful!");
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
-      toast.error("Invalid username or passkey.");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -46,7 +46,12 @@ const LoginPage = () => {
   return (
     <>
       <div className="bg-[#f5f2e5] h-screen flex items-center justify-center">
-        <GridLines className="grid-area" cellWidth={20} strokeWidth={1} cellWidth2={20}>
+        <GridLines
+          className="grid-area"
+          cellWidth={20}
+          strokeWidth={1}
+          cellWidth2={20}
+        >
           <motion.div
             className="border-2 border-black p-8 rounded-lg relative shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -67,14 +72,19 @@ const LoginPage = () => {
               >
                 Login
               </motion.h2>
-              <form onSubmit={handleSubmit} className="space-y-4 mt-6 font-mono">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 mt-6 font-mono"
+              >
                 <motion.div
                   className="flex items-center space-x-4"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <label className="text-xl font-semibold w-28 text-black">Username</label>
+                  <label className="text-xl font-semibold w-28 text-black">
+                    Username
+                  </label>
                   <input
                     type="text"
                     name="username"
@@ -90,7 +100,9 @@ const LoginPage = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <label className="text-xl font-semibold w-28 text-black">Passkey</label>
+                  <label className="text-xl font-semibold w-28 text-black">
+                    Passkey
+                  </label>
                   <input
                     type="password"
                     name="privateKeyHex"
@@ -110,11 +122,16 @@ const LoginPage = () => {
                   {loading ? "Logging In..." : "Login"}
                 </motion.button>
               </form>
-              {error && <p className="mt-4 text-center text-red-500">{error}</p>}
+              {error && (
+                <p className="mt-4 text-center text-red-500">{error}</p>
+              )}
               <div className="mt-4 text-center">
                 <p className="text-sm text-black">
-                  Don’t have an account?{' '}
-                  <a href="/signup" className="text-[#DC483A] font-bold underline">
+                  Don’t have an account?{" "}
+                  <a
+                    href="/signup"
+                    className="text-[#DC483A] font-bold underline"
+                  >
                     Sign up here
                   </a>
                 </p>

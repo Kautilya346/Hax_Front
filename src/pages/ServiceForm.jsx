@@ -10,6 +10,8 @@ const ServiceForm = () => {
     price: "",
     image: null,
     description: "",
+    domain: "",
+    contact: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -33,7 +35,14 @@ const ServiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.price || !formData.image || !formData.description) {
+    if (
+      !formData.title ||
+      !formData.price ||
+      !formData.image ||
+      !formData.description ||
+      !formData.domain ||
+      !formData.contact
+    ) {
       toast.error("All fields are required.");
       return;
     }
@@ -43,16 +52,29 @@ const ServiceForm = () => {
     formDataToSend.append("price", formData.price);
     formDataToSend.append("image", formData.image);
     formDataToSend.append("description", formData.description);
+    formDataToSend.append("domain", formData.domain);
+    formDataToSend.append("contact", formData.contact.toString());
 
     try {
-      const response = await axios.post("http://localhost:3000/service/user", formDataToSend, {
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "http://localhost:3000/service/user",
+        formDataToSend,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (response.status === 201) {
         toast.success("Service added successfully!");
-        setFormData({ title: "", price: "", image: null, description: "" });
+        setFormData({
+          title: "",
+          price: "",
+          image: null,
+          description: "",
+          domain: "",
+          contact: "",
+        });
         setImagePreview(null);
       }
     } catch (err) {
@@ -63,7 +85,12 @@ const ServiceForm = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f5f2e5] font-mono">
-      <GridLines className="grid-area" cellWidth={40} strokeWidth={1} lineColor="rgba(0,0,0,0.2)">
+      <GridLines
+        className="grid-area"
+        cellWidth={40}
+        strokeWidth={1}
+        lineColor="rgba(0,0,0,0.2)"
+      >
         <motion.div
           className="w-[600px] border-2 border-black rounded-lg p-8 bg-[#ffffff] shadow-xl"
           initial={{ opacity: 0, y: 50 }}
@@ -102,7 +129,39 @@ const ServiceForm = () => {
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }}>
-              <label className="block text-black font-bold mb-1">Description</label>
+              <label className="block text-black font-bold mb-1">Domain</label>
+              <select
+                name="domain"
+                value={formData.domain}
+                onChange={handleChange}
+                className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
+              >
+                <option value="">Select domain</option>
+                <option value="Web Development">Web Development</option>
+                <option value="App Development">App Development</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Graphic Designing">Graphic Designing</option>
+              </select>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <label className="block text-black font-bold mb-1">
+                Contact Number
+              </label>
+              <input
+                type="text"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
+                placeholder="Enter contact number"
+              />
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <label className="block text-black font-bold mb-1">
+                Description
+              </label>
               <textarea
                 name="description"
                 value={formData.description}
@@ -114,7 +173,9 @@ const ServiceForm = () => {
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }}>
-              <label className="block text-black font-bold mb-1">Upload Image</label>
+              <label className="block text-black font-bold mb-1">
+                Upload Image
+              </label>
               <input
                 type="file"
                 name="image"
@@ -124,7 +185,9 @@ const ServiceForm = () => {
               />
               {imagePreview && (
                 <div className="mt-4 border-2 border-black rounded-md p-3 bg-[#f5f2e5]">
-                  <p className="text-black text-sm font-bold mb-2">Image Preview:</p>
+                  <p className="text-black text-sm font-bold mb-2">
+                    Image Preview:
+                  </p>
                   <motion.img
                     src={imagePreview}
                     alt="Uploaded"
