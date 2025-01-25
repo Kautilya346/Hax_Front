@@ -1,11 +1,54 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import dp from "../assets/dp.jpg";
 import GridLines from "react-gridlines";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { use } from "react";
 
-const TransactionPage = () => {
+
+const TransactionPage =() => {
+
+  const location=useLocation();
+  const projectID= "6794826ef4e37ad98cefac14";
+
+  const [user1Name, setUser1Name] = useState("Hacker");
+  const [user1Dp, setUser1Dp] = useState("https://randomuser.me/api/portraits/men/12.jpg");
+  const [user1PublicKey, setUser1PublicKey] = useState("gandhi");
+  const [user1Bool, setUser1Bool] = useState(false);
+
+  const [user2Name, setUser2Name] = useState("Cutie");
+  const [user2Dp, setUser2Dp] = useState("https://randomuser.me/api/portraits/women/11.jpg");
+  const [user2PublicKey, setUser2PublicKey] = useState("nehru");
+  const [user2Bool, setUser2Bool] = useState(true);
+  
+
+
+  useEffect(() => {
+  const getProject=async()=>{
+    
+    try {
+      const resp=await axios.get(`http://localhost:3000/project/getprojectdetail/${projectID}`);
+      console.log(resp.data)
+      setUser1Name(resp.data.Employer.username);
+      //setUser1Dp();
+      setUser1PublicKey(resp.data.Employer.publicKey);
+      setUser1Bool(resp.data.Employer.verified);
+      setUser2Name(resp.data.user2.username);
+      //setUser2Dp();
+      setUser2PublicKey(resp.data.user2.publicKey);
+      setUser2Bool(resp.data.user2.verified);
+      return resp.data;
+    } catch (error) {
+      console.log("Error:",error);
+    }
+  }
+  getProject();
+},[]);
+
+
 
   const user = [{
-    name: "Aditya",
+    name: "Hacker",
     dp: "https://randomuser.me/api/portraits/men/12.jpg",
     publickey: "gandhi",
     bool:false
@@ -42,9 +85,8 @@ const TransactionPage = () => {
                         className="w-36 h-36 border-4 border-black rounded-full object-cover"
                       />
                     </div>
-                    <p className="text-3xl text-black font-gravity">{user[0].name}</p>
-                    <p className="text-sm text-gray-600">({user[0].publickey})</p>
-                    {user[0].bool ? (
+                    <p className="text-3xl text-black font-gravity">{user1Name}</p>
+                    <p className="text-sm text-gray-600">({`${user1PublicKey.slice(0, 6)}...${user1PublicKey.slice(-4)}`})</p>                    {user1Bool ? (
                       <p className="text-md font-bold text-green-600">Verified</p>
                     ) : ( 
                       <p className="text-md font-bold text-red-600">Not Verified</p>
@@ -63,9 +105,9 @@ const TransactionPage = () => {
                         className="w-36 h-36 border-4 border-black rounded-full object-cover"
                       />
                     </div>
-                    <p className="text-3xl text-black font-gravity">{user[1].name}</p>
-                    <p className="text-sm text-gray-600">({user[1].publickey})</p>
-                    {user[1].bool ? (
+                    <p className="text-3xl text-black font-gravity">{user2Name}</p>
+                    <p className="text-sm text-gray-600">({`${user1PublicKey.slice(0, 6)}...${user1PublicKey.slice(-4)}`})</p>
+                    {user2Bool ? (
                       <p className="text-md font-bold text-green-600">Verified</p>
                     ) : ( 
                       <p className="text-md font-bold text-red-600">Not Verified</p>
