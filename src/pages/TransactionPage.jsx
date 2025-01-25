@@ -20,6 +20,13 @@ const TransactionPage = () => {
   const [user2PublicKey, setUser2PublicKey] = useState("nehru");
   const [user2Bool, setUser2Bool] = useState(true);
 
+  const user = [{
+    dp: "https://randomuser.me/api/portraits/men/12.jpg",
+  }, {
+    dp: "https://randomuser.me/api/portraits/women/11.jpg",
+  }
+  ];
+
 
   useEffect(() => {
     const getProject = async () => {

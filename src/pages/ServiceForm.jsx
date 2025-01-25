@@ -84,10 +84,10 @@ const ServiceForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f5f2e5] font-mono">
+    <div className="min-h-screen h-full flex items-center justify-center bg-[#f5f2e5] font-mono">
       <GridLines
-        className="grid-area"
-        cellWidth={40}
+        className="h-full grid-area"
+        cellWidth={20}
         strokeWidth={1}
         lineColor="rgba(0,0,0,0.2)"
       >

@@ -134,7 +134,7 @@ const ExplorePage = () => {
                 {activePerson && (
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                     <div
-                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
+                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border-2 border-black transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                       style={{ animation: "fadeIn 1s forwards" }}
                       onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
@@ -142,7 +142,7 @@ const ExplorePage = () => {
                       <img
                         src={activePerson.mainphoto}
                         alt="Main"
-                        className="mx-auto w-72 h-72 object-cover rounded-xl"
+                        className="mx-auto w-72 h-72 object-cover rounded-xl border-2 border-black"
                       />
                       <button
                         onClick={() => handleClick(activePerson)}
@@ -154,7 +154,7 @@ const ExplorePage = () => {
                         <img
                           src={activePerson.dp}
                           alt="DP"
-                          className="w-16 h-16 object-cover rounded-full"
+                          className="w-16 h-16 object-cover rounded-full border-black border-2"
                         />
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
