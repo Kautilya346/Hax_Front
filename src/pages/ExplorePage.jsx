@@ -15,7 +15,7 @@ const ExplorePage = () => {
     // Function to fetch services
     const fetchServices = async () => {
       try {
-        const response = await fetch("http://localhost:3000/service/users");
+        const response = await fetch("https://hax-back.vercel.app/service/users");
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }
@@ -196,10 +196,10 @@ const ExplorePage = () => {
                   placeholder="Search by name"
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
-                  className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/3 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
+                  className="border-2 h-12 border-black rounded-md px-3 py-2 mb-8 w-2/3 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
                 />
                 <select
-                  className=" w-fit border font-serif h-12 bg-[#fc8277] border-gray-300 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
+                  className=" w-fit font-mono h-12 bg-[#fc8277] border-black border-2 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
                   onChange={(event) => setDomainFilter(event.target.value)}
                   defaultValue=""
                 >
@@ -236,7 +236,7 @@ const ExplorePage = () => {
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                     <div
                       className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
-                      style={{ animation: "fadeIn 0.5s forwards" }}
+                      style={{ animation: "fadeIn 1s forwards" }}
                       onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
                     >

@@ -33,7 +33,7 @@ const HirePage = () => {
     try {
       // Make POST request to backend to create the project
       const response = await axios.post(
-        "http://localhost:3000/project",
+        "https://hax-back.vercel.app/project",
         {
           user2: person.userid, // Freelancer's ID
           price: person.price, // Price associated with the freelancer
