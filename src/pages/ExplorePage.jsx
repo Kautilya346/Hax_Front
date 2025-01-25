@@ -3,6 +3,7 @@ import GridLines from "react-gridlines";
 import { PeopleCard } from "../components/PeopleCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ThreeCircles } from "react-loader-spinner";
 
 import img1 from "../assets/1.png";
 import img2 from "../assets/2.png";
@@ -18,8 +19,9 @@ const ExplorePage = () => {
   const [domainFilter, setDomainFilter] = useState("");
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Function to fetch services
     const fetchServices = async () => {
       try {
         const response = await fetch("http://localhost:3000/service/users");
@@ -28,24 +30,35 @@ const ExplorePage = () => {
         }
         const data = await response.json();
         setServices(data.services);
-        // Update state with the fetched services
       } catch (error) {
-        setError(error.message); // Set error if any
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchServices();
-
-    console.log("hiiii");
-    // Call the function to fetch services when the component mounts
   }, []);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <ThreeCircles
+          visible={true}
+          height="100"
+          width="100"
+          color="#DC483A"
+          ariaLabel="three-circles-loading"
+        />
+      </div>
+    );
+  }
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   const peopledata = services.map((service) => ({
-    userid: service.user._id, // Adding the id field from the original object
+    userid: service.user._id,
     dp: service.image,
     name: service.user.username,
     work: service.title,

@@ -3,12 +3,28 @@ import dp from "../assets/dp.jpg";
 import GridLines from "react-gridlines";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { use } from "react";
 import CoinButton from "../components/CoinButton";
+
+
+async function initiateTransaction(receiverAddress,amount){
+  try{
+    const resp=await axios.post(`http://localhost:3000/transaction/sendmoney`,{
+      receiverAddress,
+      amount
+    },{
+      withCredentials:true
+    });
+    console.log(resp.data);
+  }catch(error){
+    console.log("Error:",error);
+  }    
+}
 
 const TransactionPage = () => {
   const location = useLocation();
-  const projectID = "6794826ef4e37ad98cefac14";
+  const { projectId } = location.state || {};
+  //const projectId = "6794826ef4e37ad98cefac14";
+  console.log("Project ID:", projectId); 
 
   const [user1Name, setUser1Name] = useState("Hacker");
   const [user1Dp, setUser1Dp] = useState("https://randomuser.me/api/portraits/men/12.jpg");
@@ -19,12 +35,23 @@ const TransactionPage = () => {
   const [user2Dp, setUser2Dp] = useState("https://randomuser.me/api/portraits/women/11.jpg");
   const [user2PublicKey, setUser2PublicKey] = useState("nehru");
   const [user2Bool, setUser2Bool] = useState(true);
+  const [amount, setAmount] = useState(1);
+  const [receiverAddress, setReceiverAddress] = useState("");
+
+
+  const user = [{
+    dp: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+  }, {
+    dp: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+  }
+  ];
+
 
 
   useEffect(() => {
     const getProject = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/project/getprojectdetail/${projectID}`);
+        const resp = await axios.get(`http://localhost:3000/project/getprojectdetail/${projectId}`);
         console.log(resp.data);
         setUser1Name(resp.data.Employer.username);
         setUser1PublicKey(resp.data.Employer.publicKey);
@@ -32,6 +59,8 @@ const TransactionPage = () => {
         setUser2Name(resp.data.user2.username);
         setUser2PublicKey(resp.data.user2.publicKey);
         setUser2Bool(resp.data.isProjectDoneByFreelancer);
+        setAmount(resp.data.price);
+        setReceiverAddress(resp.data.user2.address);
       } catch (error) {
         console.log("Error:", error);
       }
@@ -115,11 +144,11 @@ useEffect(() => {
                 </div>
 
                 <p className="text-center text-2xl font-bold text-black">
-                  Amount : <span className="text-[#000000]">$30,000</span>
+                  Amount : <span className="text-[#000000]">APT {amount}</span>
                 </p>
 
                 <div className="mt-6 flex justify-center">
-                  <CoinButton balance={balance} user1Bool={user1Bool} user2Bool={user2Bool}/> 
+                  <CoinButton balance={balance} user1Bool={user1Bool} user2Bool={user2Bool} amount={amount} receiverAddress={receiverAddress}/> 
                 </div>
               </div>
             </div>

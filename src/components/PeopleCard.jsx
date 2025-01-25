@@ -63,7 +63,7 @@ export const PeopleCard = ({
         </div>
 
         <p className="text-black text-sm mt-2">{work}</p>
-        <p className="text-black text-sm mt-1 font-semibold mt-3">
+        <p className="text-black text-sm mt-1 font-semibold">
           Domain:{domain[0].toUpperCase() + domain.slice(1)}
         </p>
         <p className="text-black text-base font-semibold ">

@@ -34,7 +34,7 @@ const LoginPage = () => {
       );
       console.log("Login Success:", response.data);
       toast.success("Login Successful!");
-      navigate("/transact");
+      navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
       toast.error(error.message);
@@ -114,7 +114,23 @@ const LoginPage = () => {
                 </motion.div>
                 <motion.button
                   type="submit"
-                  className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide shadow-md"
+<<<<<<< HEAD
+                  className="w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
+
+                  shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
+              
+                  transition-all duration-300 ease-in-out transform-gpu 
+              
+                  hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
+              
+                  active:translate-y-2 active:shadow-none"
+=======
+                  className=" w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
+    shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
+    transition-all duration-300 ease-in-out transform-gpu 
+    hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
+    active:translate-y-2 active:shadow-none"
+>>>>>>> baa8bb1cad39a958de59cbd6c637846a89d39e6e
                   disabled={loading}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -125,15 +141,15 @@ const LoginPage = () => {
               {error && (
                 <p className="mt-4 text-center text-red-500">{error}</p>
               )}
-              <div className="mt-4 text-center">
+              <div className="mt-4 text-center font-mono font-semibold">
                 <p className="text-sm text-black">
                   Don’t have an account?{" "}
-                  <a
-                    href="/signup"
+                  <button
+                    onClick={()=>navigate('/signup')}
                     className="text-[#DC483A] font-bold underline"
                   >
-                    Sign up here
-                  </a>
+                    SIGN UP HERE
+                  </button>
                 </p>
               </div>
             </motion.div>
