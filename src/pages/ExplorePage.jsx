@@ -131,15 +131,7 @@ const ExplorePage = () => {
                       onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
                     >
-<<<<<<< HEAD
-                      <img
-                        src={activePerson.mainphoto}
-                        alt="Main"
-                        className="mx-auto w-72 h-72 object-cover rounded-xl border-2 border-black"
-                      />
-=======
                       <img src={activePerson.mainphoto} alt="Main" className="mx-auto w-72 h-72 object-cover rounded-xl" />
->>>>>>> 5e6d0a099f036789ed631c603a544ec588cb2735
                       <button
                         onClick={() => handleClick(activePerson)}
                         className="absolute top-4 right-4 bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300"
@@ -147,15 +139,7 @@ const ExplorePage = () => {
                         HIRE
                       </button>
                       <div className="mt-4 flex items-center gap-4">
-<<<<<<< HEAD
-                        <img
-                          src={activePerson.dp}
-                          alt="DP"
-                          className="w-16 h-16 object-cover rounded-full border-black border-2x"
-                        />
-=======
                         <img src={activePerson.dp} alt="DP" className="w-16 h-16 object-cover rounded-full" />
->>>>>>> 5e6d0a099f036789ed631c603a544ec588cb2735
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">{activePerson.name}</h3>
                           <p className="text-gray-800 text-sm mt-1">{activePerson.work}</p>
