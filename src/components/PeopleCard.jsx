@@ -47,7 +47,7 @@ export const PeopleCard = ({
           src={mainphoto}
           alt="Profile Work"
           className="object-cover w-4/5 mx-auto py-5"
-          style={{ width: '250px', height: '300px' }}
+          style={{ width: "250px", height: "300px" }}
         />
       </div>
       <hr className="border-black border-2 mx-10 rounded-lg" />
@@ -57,14 +57,13 @@ export const PeopleCard = ({
             src={dp}
             alt="Profile"
             className="w-1/6 h-1/6 object-contain rounded-full"
-            style={{ width: '40px', height: '40px' }}
-
+            style={{ width: "40px", height: "40px" }}
           />
           <h3 className="text-l font-bold text-black">{name}</h3>
         </div>
 
         <p className="text-black text-sm mt-2">{work}</p>
-        <p className="text-black text-sm mt-1 font-semibold mt-3">
+        <p className="text-black text-sm mt-1 font-semibold">
           Domain:{domain[0].toUpperCase() + domain.slice(1)}
         </p>
         <p className="text-black text-base font-semibold ">

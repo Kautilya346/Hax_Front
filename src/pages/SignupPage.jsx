@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GridLines from "react-gridlines";
+<<<<<<< HEAD
 import { Link, useNavigate } from "react-router-dom";
 import { motion,AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { FaCopy } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
+=======
+import { motion } from "framer-motion";
+import axios from "axios";
+import Preloader from "../assets/preloader"; // Import Preloader component
+>>>>>>> baa8bb1cad39a958de59cbd6c637846a89d39e6e
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -60,6 +66,7 @@ const SignupPage = () => {
     }
   };
 
+<<<<<<< HEAD
   const handleCopy = () => {
     navigator.clipboard.writeText(privateKey).then(() => {
     toast.success("Private key copied to clipboard!");
@@ -83,8 +90,31 @@ const SignupPage = () => {
           animate={{ borderWidth: "3px", borderColor: "#000" }}
           transition={{ duration: 0.6 }}
         >
+=======
+  useEffect(() => {
+    // Simulate a loading delay to show the preloader
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false); // Hide preloader after 2 seconds
+    }, 300);
+
+    return () => clearTimeout(timer); // Clean up the timeout on component unmount
+  }, []);
+
+  return (
+    <GridLines
+      className="grid-area h-full flex items-center justify-center"
+      cellWidth={20}
+      strokeWidth={1}
+      cellWidth2={20}
+    >
+      <div className="bg- h-screen  pb-16 relative flex justify-center items-center">
+        {/* Display preloader if page is loading */}
+        {isLoadingPage && <Preloader />}
+
+        <motion.div>
+>>>>>>> baa8bb1cad39a958de59cbd6c637846a89d39e6e
           <motion.div
-            className="border-2 border-black p-8 rounded-md"
+            className="border-23 border-black p-8 rounded-md"
             initial={{ borderWidth: "0.1px", borderColor: "#000" }}
             animate={{ borderWidth: "3px", borderColor: "#000" }}
             transition={{ duration: 0.6 }}
@@ -109,7 +139,10 @@ const SignupPage = () => {
                   Create an Account
                 </motion.h2>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-4 mt-6 font-mono">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 mt-6 font-mono"
+              >
                 <div className="flex items-center space-x-4">
                   <motion.label
                     className="text-xl font-semibold w-28 text-black"
@@ -176,6 +209,7 @@ const SignupPage = () => {
                 <motion.button
                   type="submit"
                   className="w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
+<<<<<<< HEAD
 
                   shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
               
@@ -184,6 +218,12 @@ const SignupPage = () => {
                   hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
               
                   active:translate-y-2 active:shadow-none"
+=======
+    shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
+    transition-all duration-300 ease-in-out transform-gpu 
+    hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
+    active:translate-y-2 active:shadow-none"
+>>>>>>> baa8bb1cad39a958de59cbd6c637846a89d39e6e
                   disabled={loading}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -216,6 +256,7 @@ const SignupPage = () => {
             </motion.div>
           </motion.div>
         </motion.div>
+<<<<<<< HEAD
       </GridLines>
       <AnimatePresence>
     {openModal && (
@@ -364,6 +405,10 @@ const SignupPage = () => {
   <Toaster position="top-center" reverseOrder={false} />
     </div>
     </>
+=======
+      </div>
+    </GridLines>
+>>>>>>> baa8bb1cad39a958de59cbd6c637846a89d39e6e
   );
 };
 
