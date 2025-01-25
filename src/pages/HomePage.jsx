@@ -82,9 +82,9 @@ const HomePage = () => {
     <div className="bg-[#f5f2e5] h-full gap-10">
       <GridLines
         className="grid-area"
-        cellWidth={30}
-        strokeWidth={2}
-        cellWidth2={30}
+        cellWidth={20}
+        strokeWidth={1}
+        cellWidth2={20}
       >
         <motion.div className="flex flex-col gap-1 border-2 border-t-0 border-black w-[90%] text-center mx-auto pb-0 m-0 relative">
           <motion.div
@@ -121,12 +121,17 @@ const HomePage = () => {
               >
                 Signup
               </Link>
-              <button
+              {/* <button
                 onClick={handleSearchClick}
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
               >
                 Search
-              </button>
+              </button> */}
+              <Link to="/profile" className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
+              >
+              Profile
+              </Link>
+
               <Link
                 to="/explore"
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"

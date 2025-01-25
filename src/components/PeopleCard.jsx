@@ -1,12 +1,33 @@
 import React, { useState } from "react";
 
-export const PeopleCard = ({ dp, name, work, price, mainphoto,description,contact, setActivePerson }) => {
+export const PeopleCard = ({
+  dp,
+  name,
+  work,
+  price,
+  mainphoto,
+  description,
+  contact,
+  domain,
+  setActivePerson,
+  userid,
+}) => {
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
   const handleMouseEnter = () => {
     const timeout = setTimeout(() => {
-      setActivePerson({ dp, name, work, price, mainphoto,description,contact });
-    }, 500); 
+      setActivePerson({
+        dp,
+        name,
+        work,
+        price,
+        mainphoto,
+        description,
+        contact,
+        domain,
+        userid,
+      });
+    }, 500);
     setHoverTimeout(timeout);
   };
 
@@ -17,26 +38,36 @@ export const PeopleCard = ({ dp, name, work, price, mainphoto,description,contac
 
   return (
     <div
-      className="group w-1/5 bg-black border border-gray-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg cursor-pointer"
+      className="group w-1/5 bg-white border-black border rounded-xl shadow-md overflow-hidden hover:shadow-lg cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <img
-        src={mainphoto}
-        alt="Profile Work"
-        className="w-full h-2/5 object-cover"
-      />
+      <div className="bg-white ">
+        <img
+          src={mainphoto}
+          alt="Profile Work"
+          className="object-cover w-4/5 mx-auto py-5"
+          style={{ width: '250px', height: '300px' }}
+        />
+      </div>
+      <hr className="border-black border-2 mx-10 rounded-lg" />
       <div className="p-4">
         <div className="flex gap-2 items-center">
           <img
             src={dp}
             alt="Profile"
-            className="w-1/6 h-1/6 object-cover rounded-full"
+            className="w-1/6 h-1/6 object-contain rounded-full"
+            style={{ width: '40px', height: '40px' }}
+
           />
-          <h3 className="text-l font-bold text-white">{name}</h3>
+          <h3 className="text-l font-bold text-black">{name}</h3>
         </div>
-        <p className="text-white text-sm mt-2">{work}</p>
-        <p className="text-white text-base font-semibold mt-3">
+
+        <p className="text-black text-sm mt-2">{work}</p>
+        <p className="text-black text-sm mt-1 font-semibold mt-3">
+          Domain:{domain[0].toUpperCase() + domain.slice(1)}
+        </p>
+        <p className="text-black text-base font-semibold ">
           Price : APT{price}
         </p>
       </div>
