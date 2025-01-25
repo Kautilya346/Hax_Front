@@ -154,7 +154,7 @@ const ExplorePage = () => {
                         <img
                           src={activePerson.dp}
                           alt="DP"
-                          className="w-16 h-16 object-cover rounded-full border-black border-2"
+                          className="w-16 h-16 object-cover rounded-full border-black border-2x"
                         />
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
