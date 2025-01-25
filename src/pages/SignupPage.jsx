@@ -62,35 +62,30 @@ const SignupPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#f5f2e5] h-screen flex items-center justify-center pb-16 relative">
-      {/* Display preloader if page is loading */}
-      {isLoadingPage && <Preloader />}
+    <GridLines
+      className="grid-area h-full flex items-center justify-center"
+      cellWidth={20}
+      strokeWidth={1}
+      cellWidth2={20}
+    >
+      <div className="bg- h-screen  pb-16 relative flex justify-center items-center">
+        {/* Display preloader if page is loading */}
+        {isLoadingPage && <Preloader />}
 
-      <GridLines
-        className="grid-area"
-        cellWidth={20}
-        strokeWidth={1}
-        cellWidth2={20}
-      >
-        <motion.div
-          className="border-[30%] border-black p-10 rounded-lg relative"
-          initial={{ borderWidth: "0.1px", borderColor: "#000" }}
-          animate={{ borderWidth: "3px", borderColor: "#000" }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div>
           <motion.div
-            className="border-2 border-black p-8 rounded-md"
+            className="border-23 border-black p-8 rounded-md"
             initial={{ borderWidth: "0.1px", borderColor: "#000" }}
             animate={{ borderWidth: "3px", borderColor: "#000" }}
             transition={{ duration: 0.6 }}
           >
             <motion.div
-              className="border-2 border-black p-10 rounded-md"
+              className="border-2 border-black p-10 rounded-md bg-white"
               initial={{ borderWidth: "0.2px", borderColor: "#000" }}
               animate={{ borderWidth: "3px", borderColor: "#000" }}
               transition={{ duration: 0.5 }}
             >
-              <div className="border-b-2 border-black ">
+              <div className="border-b-2 border-black  ">
                 <motion.h2
                   className="text-6xl font-bold text-black text-center font-gravity tracking-wider"
                   initial={{ opacity: 0, y: -40, scale: 0.9 }}
@@ -210,8 +205,8 @@ const SignupPage = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-      </GridLines>
-    </div>
+      </div>
+    </GridLines>
   );
 };
 
