@@ -32,12 +32,6 @@ const ServiceForm = () => {
     }
   };
 
-  const handleRemoveImage = () => {
-    setFormData({ ...formData, image: null });
-    setImagePreview(null);
-    document.getElementById("imageInput").value = ""; // Reset the file input
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,11 +44,6 @@ const ServiceForm = () => {
       !formData.contact
     ) {
       toast.error("All fields are required.");
-      return;
-    }
-
-    if (formData.price <= 0) {
-      toast.error("Price must be a positive number.");
       return;
     }
 
@@ -128,9 +117,7 @@ const ServiceForm = () => {
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }}>
-              <label className="block text-black font-bold mb-1">
-                Price (APT)
-              </label>
+              <label className="block text-black font-bold mb-1">Price</label>
               <input
                 type="number"
                 name="price"
@@ -138,7 +125,6 @@ const ServiceForm = () => {
                 onChange={handleChange}
                 className="w-full p-3 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
                 placeholder="Enter price"
-                min="1"
               />
             </motion.div>
 
@@ -196,7 +182,6 @@ const ServiceForm = () => {
                 accept="image/*"
                 onChange={handleChange}
                 className="w-full p-2 border-2 border-black rounded-md bg-[#f5f2e5] outline-none focus:ring-2 focus:ring-black"
-                id="imageInput"
               />
               {imagePreview && (
                 <div className="mt-4 border-2 border-black rounded-md p-3 bg-[#f5f2e5]">
@@ -211,25 +196,14 @@ const ServiceForm = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                   />
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className="mt-2 text-red-500 underline hover:text-red-700"
-                  >
-                    Remove Image
-                  </button>
                 </div>
               )}
             </motion.div>
 
             <motion.button
               type="submit"
-              className="w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
-    shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
-    transition-all duration-300 ease-in-out transform-gpu 
-    hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
-    active:translate-y-2 active:shadow-none"
-              whileHover={{ scale: 1.05 }} // Removed rotate
+              className="w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold hover:bg-[#DC483A] transition-all shadow-md"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Add Service
