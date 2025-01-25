@@ -8,6 +8,7 @@ const ExplorePage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [activePerson, setActivePerson] = useState(null);
+  const [domainFilter, setDomainFilter] = useState("");
 
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
@@ -42,6 +43,7 @@ const ExplorePage = () => {
     dp: service.image,
     name: service.title,
     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+    domain: "web development",
     description: service.description,
     price: service.price.toString(),
     mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
@@ -140,9 +142,103 @@ const ExplorePage = () => {
   //     contact: "1234567890",
   //   },
   // ];
+  // const peopledata = [
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/men/1.jpg",
+  //     name: "John Doe",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description:"I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "web development",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/women/2.jpg",
+  //     name: "Aditya Bajpayee",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "web development",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/women/2.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
+  //     name: "Srivas",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain:"app development",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
+  //     name: "Srivas",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain:"app development",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/men/5.jpg",
+  //     name: "Kumar Ji",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "Hi, I'm Aditya, a passionate developer with expertise in the MERN stack. I specialize in creating dynamic, responsive websites with a focus on performance and user experience. I'm always eager to learn new technologies and love solving complex problems. Let's build something amazing together!",
+  //     domain: "web development",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/men/5.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/men/6.jpg",
+  //     name: "Mandav Para",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain:"video editing",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/men/6.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/men/7.jpg",
+  //     name: "Kautila N",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web developer with 5 years of experience in web development. I have worked with many clients and have a good track record.",
+  //     domain:"graphic designing",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/men/7.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/men/8.jpg",
+  //     name: "Nath Godam",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain:"graphic designing",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/men/8.jpg",
+  //     contact: "1234567890",
+  //   },
+  //   {
+  //     dp: "https://randomuser.me/api/portraits/women/1.jpg",
+  //     name: "Jai Jinendra",
+  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
+  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain:"video editing",
+  //     price: "500",
+  //     mainphoto: "https://randomuser.me/api/portraits/women/1.jpg",
+  //     contact: "1234567890",
+  //   },
+  // ];
 
-  const filteredPeople = peopledata.filter((person) =>
-    person.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPeople = peopledata.filter(
+    (person) =>
+      person.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      person.domain.includes(domainFilter)
   );
 
   const pageVariants = {
@@ -155,17 +251,17 @@ const ExplorePage = () => {
     navigate("/hire", { state: { person } });
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   return (
     <div className="h-full w-screen">
       <div className="bg-[#f5f2e5] h-full w-screen">
         <GridLines
-          className="h-screen grid-area"
+          className="min-h-screen h-full grid-area"
           cellWidth={20}
           strokeWidth={1}
         >
@@ -175,91 +271,31 @@ const ExplorePage = () => {
             animate="visible"
             exit="exit"
           >
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center">
               <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">
                 Experts Available
               </h1>
             </div>
-            <div className="flex flex-col items-center py-5 px-4">
-              <div className="relative flex items-center justify-center gap-5 w-full">
+            <div className="flex flex-col items-center py-5 px-4 font-mono">
+              <div className="flex justify-between w-2/3">
                 <input
                   type="text"
                   placeholder="Search by name"
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
-                  className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/5 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
+                  className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/3 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
                 />
-
-                <div className="relative inline-block">
-                  <button
-                    onClick={toggleDropdown}
-                    className="mb-2 p-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button"
-                  >
-                    Choose Domain
-                    <svg
-                      className="w-2.5 h-2.5 ms-3"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 10 6"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 1 4 4 4-4"
-                      />
-                    </svg>
-                  </button>
-
-                  {/* Conditionally render dropdown based on `isOpen` state */}
-                  {isOpen && (
-                    <div
-                      id="dropdown"
-                      className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 mt-1"
-                    >
-                      <ul
-                        className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownDefaultButton"
-                      >
-                        <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Web Developer
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            App Developer
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Video Editor
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Graphic Designer
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
+                <select
+                  className="w-fit border font-serif h-12 bg-[#fc8277] border-gray-300 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
+                  onChange={(event) => setDomainFilter(event.target.value)}
+                  defaultValue=""
+                >
+                  <option value="">All Experts</option>
+                  <option value="web development">Web Development</option>
+                  <option value="app development">App Development</option>
+                  <option value="video editing">Video Editing</option>
+                  <option value="graphic designing">Graphic Designing</option>
+                </select>
               </div>
               <div className="relative w-full flex flex-wrap justify-center items-center gap-5 max-w-8xl">
                 {filteredPeople.length === 0 ? (
@@ -267,9 +303,9 @@ const ExplorePage = () => {
                     No results found
                   </p>
                 ) : (
-                  filteredPeople.map((person, index) => (
+                  filteredPeople.map((person) => (
                     <PeopleCard
-                      key={index}
+                      key={person.id} // Use unique identifier instead of index
                       dp={person.dp}
                       name={person.name}
                       work={person.work}
@@ -277,6 +313,7 @@ const ExplorePage = () => {
                       mainphoto={person.mainphoto}
                       description={person.description}
                       contact={person.contact}
+                      domain={person.domain}
                       setActivePerson={setActivePerson}
                     />
                   ))
@@ -284,9 +321,8 @@ const ExplorePage = () => {
                 {activePerson && (
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                     <div
-                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#bdaa6d] via-white to-[#bdaa6d] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
+                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                       style={{ animation: "fadeIn 0.5s forwards" }}
-                      onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
                     >
                       <img
@@ -296,7 +332,7 @@ const ExplorePage = () => {
                       />
                       <button
                         onClick={() => handleClick(activePerson)}
-                        className="absolute top-4 right-4 bg-[#3b3314] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300"
+                        className="absolute top-4 right-4 bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#DC483A] hover:scale-110 transition duration-300"
                       >
                         HIRE
                       </button>
@@ -310,23 +346,10 @@ const ExplorePage = () => {
                           <h3 className="text-2xl font-bold text-gray-800">
                             {activePerson.name}
                           </h3>
-                          <p className="text-gray-600 text-sm mt-1">
+                          <p className="text-gray-800 text-sm mt-1">
                             {activePerson.work}
                           </p>
                         </div>
-                      </div>
-                      <div className="mt-2 text-wrap">
-                        <span className="font-bold">Description : </span>
-                        <span className="">{activePerson.description}</span>
-                      </div>
-                      <div className="text-gray-900 text-lg font-semibold mt-3">
-                        Price : APT{activePerson.price}
-                      </div>
-                      <div className="mt-1">
-                        <span>
-                          <span className="font-bold">Contact : </span>
-                          {activePerson.contact}
-                        </span>
                       </div>
                     </div>
                   </div>

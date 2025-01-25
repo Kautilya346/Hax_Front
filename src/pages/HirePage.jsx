@@ -47,7 +47,7 @@ const HirePage = () => {
   };
 
   return (
-    <div className="font-serif">
+    <div className="font-mono h-auto">
       <GridLines className="h-full grid-area" cellWidth={20} strokeWidth={1}>
         {person ? (
           <motion.div
@@ -62,7 +62,7 @@ const HirePage = () => {
             <div className="flex justify-between px-16 gap-44 ml-5">
               <div className="flex flex-col items-center">
                 <motion.img
-                  className="w-2/3 rounded-2xl shadow-2xl shadow-gray-900 mb-10"
+                  className="w-2/3 rounded-2xl shadow-xl shadow-gray-500 mb-10"
                   src={person.dp}
                   alt="DP"
                   whileHover={{ scale: 1.1 }}
@@ -80,6 +80,8 @@ const HirePage = () => {
 
                 <textarea
                   className="w-full h-2/3 p-3 outline-none placeholder-gray-500 bg-[#f5f2e5] text-gray-900 rounded-xl text-xl"
+                  name="description"
+                  id=""
                   value={description}
                   onChange={(e) => setDescription(e.target.value)} // Handle textarea changes
                   placeholder="Describe your work!"
