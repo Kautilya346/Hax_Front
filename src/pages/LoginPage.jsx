@@ -137,7 +137,7 @@ const LoginPage = () => {
                 <p className="text-sm text-black">
                   Don’t have an account?{" "}
                   <button
-                    onClick={()=>navigate('/signup')}
+                    onClick={() => navigate("/signup")}
                     className="text-[#DC483A] font-bold underline"
                   >
                     SIGN UP HERE

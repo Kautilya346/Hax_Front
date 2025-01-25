@@ -62,7 +62,11 @@ const HirePage = () => {
 
   return (
     <div className="font-mono h-auto">
-      <GridLines className="min-h-screen h-full grid-area" cellWidth={20} strokeWidth={1}>
+      <GridLines
+        className="min-h-screen h-full grid-area"
+        cellWidth={20}
+        strokeWidth={1}
+      >
         {person ? (
           <motion.div
             variants={pageVariants}

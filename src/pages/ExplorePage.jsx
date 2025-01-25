@@ -5,10 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ThreeCircles } from "react-loader-spinner";
 
+import img1 from "../assets/1.png";
+import img2 from "../assets/2.png";
+import img3 from "../assets/3.webp";
+import img4 from "../assets/4.png";
 const ExplorePage = () => {
   const location = useLocation();
   const { domain } = location.state || {};
-  
 
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,10 +62,19 @@ const ExplorePage = () => {
     dp: service.image,
     name: service.user.username,
     work: service.title,
-    domain: service.domain,
+    domain: service.domain, // Example domain field
     description: service.description,
     price: service.price.toString(),
-    mainphoto: service.image,
+    mainphoto:
+      service.domain === "Web Development"
+        ? img3
+        : service.domain === "App Development"
+        ? img4
+        : service.domain === "Video Editing"
+        ? img2
+        : service.domain === "Graphic Designing"
+        ? img1
+        : 1, // Default to service.image if no match
     contact: service.contact, // Example contact field
   }));
 

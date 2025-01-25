@@ -12,6 +12,9 @@ const ProfilePage = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isProjectDoneByEmployer, setIsProjectDoneByEmployer] = useState(false);
+  const [isProjectDoneByFreelancer, setIsProjectDoneByFreelancer] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -26,6 +29,9 @@ const ProfilePage = () => {
         const { username, publicKey } = user;
         setUser({ username, publicKey });
         setProjects(projects);
+
+        console.log("User Profile:", { username, publicKey });
+        console.log("User Projects:", projects[0]);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch user profile");
       } finally {
@@ -36,6 +42,58 @@ const ProfilePage = () => {
     fetchUserProfile();
   }, []);
 
+  const handleMarkAsDone = async (project) => {
+    console.log(project, "project hai yeh");
+
+    try {
+      let updateData = {};
+      console.log(user, "user id");
+      if (user.username === project.Employer.username) {
+        console.log("ljdnksjnksjnskjdcnskcjnskcjkj");
+
+        const newStatus = !isProjectDoneByEmployer;
+        setIsProjectDoneByEmployer(newStatus);
+        updateData = { isProjectDoneByEmployer: newStatus };
+        console.log(newStatus, "by empp");
+      } else if (user.username === project.user2.username) {
+        console.log("popopopopopop");
+
+        const newStatus = !isProjectDoneByFreelancer;
+        setIsProjectDoneByFreelancer(newStatus);
+        updateData = { isProjectDoneByFreelancer: newStatus };
+        console.log(newStatus, "by free");
+      }
+
+      // Send the update request to the backend
+      const response = await axios.post(
+        "http://localhost:3000/project/updatebool",
+        {
+          projectId: project._id,
+          ...updateData,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Project updated successfully:", response.data);
+        window.location.reload(); // Reload the page to reflect changes
+      } else {
+        console.error("Failed to update project:", response.data.message);
+      }
+    } catch (error) {
+      console.error(
+        "Error updating project:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  // const handleMarkAsDone = (project) => {
+  //   console.log(project, "project hai yeh");
+  //   console.log("hiiiiiiiii");
+  // };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
   const handleCopy = () => {
     if (user?.publicKey) {
       navigator.clipboard.writeText(user.publicKey).then(() => {
@@ -126,7 +184,10 @@ const ProfilePage = () => {
 
       {/* Active Projects Section */}
       <div className="p-10 border-t-2 mt-2 border-black">
-        <h2 className="text-3xl font-bold mb-6 font-gravity">Active Projects</h2>
+        <h2 className="text-3xl font-bold mb-6 font-gravity">
+          Active Projects
+        </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {projects.length > 0 ? (
             projects.map((project, index) => (
@@ -140,18 +201,43 @@ const ProfilePage = () => {
                     ${project.price || "N/A"}
                   </span>
                 </div>
+                <h3 className="text-xl font-thin font-mono">
+                  Employer : {project.Employer.username}{" "}
+                </h3>
+                <h3 className="text-xl font-thin font-mono">
+                  Freelancer : {project.user2.username}
+                </h3>
                 <p className="text-sm font-mono">
                   {project.description ||
                     "A brief description of the service offered goes here. Add more details to make it engaging."}
                 </p>
                 <p className="text-sm font-semibold mt-2">
-                  Completed by freelancer: {" "}
+                  Completed by freelancer:{" "}
                   {project.isProjectDoneByFreelancer ? (
                     <span className="text-green-500">✔</span>
                   ) : (
                     <span className="text-red-500">❌</span>
                   )}
                 </p>
+                <p className="text-sm font-semibold mt-2">
+                  Completed by Employer:{" "}
+                  {project.isProjectDoneByEmployer ? (
+                    <span className="text-green-500">✔️</span> // Green tick if true
+                  ) : (
+                    <span className="text-red-500">❌</span> // Red cross if false
+                  )}
+                </p>
+                {/* Project Completed Button */}
+                <button
+                  className="relative mt-4 w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md border-2 border-black 
+      shadow-[0_4px_0_#3b82f6,0_8px_0_#3b82f6] 
+      transition-all duration-300 ease-in-out transform-gpu 
+      hover:-translate-y-1 hover:shadow-[0_6px_0_#3b82f6,0_12px_0_#3b82f6] hover:brightness-95 
+      active:translate-y-2 active:shadow-none"
+                  onClick={() => handleMarkAsDone(project)}
+                >
+                  Mark as Done
+                </button>
                 <button
                   className="relative mt-4 w-full px-4 py-2 bg-[#82db85] text-white font-semibold rounded-md border-2 border-black 
                     shadow-[0_4px_0_#45a049,0_8px_0_#2c6b2f] 
@@ -160,7 +246,7 @@ const ProfilePage = () => {
                     active:translate-y-2 active:shadow-none"
                   onClick={() => handleNavigate(project._id)}
                 >
-                  Project Completed
+                  Complete Transaction
                 </button>
               </div>
             ))

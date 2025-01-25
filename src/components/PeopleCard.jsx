@@ -46,7 +46,7 @@ export const PeopleCard = ({
         <img
           src={mainphoto}
           alt="Profile Work"
-          className="object-cover w-4/5 mx-auto py-5"
+          className="object-contain w-4/5 mx-auto py-5"
           style={{ width: "250px", height: "300px" }}
         />
       </div>
