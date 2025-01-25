@@ -84,12 +84,11 @@ const ServiceForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f5f2e5] font-mono">
+    <div className="h-full w-full flex items-center justify-center bg-[#f5f2e5] font-mono">
       <GridLines
-        className="grid-area"
-        cellWidth={40}
+        className="min-h-screen h-full w-full flex justify-center pt-10 grid-area"
+        cellWidth={20}
         strokeWidth={1}
-        lineColor="rgba(0,0,0,0.2)"
       >
         <motion.div
           className="w-[600px] border-2 border-black rounded-lg p-8 bg-[#ffffff] shadow-xl"

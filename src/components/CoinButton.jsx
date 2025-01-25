@@ -1,22 +1,38 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
-function CoinButton({balance,user1Bool,user2Bool}) {
+async function initiateTransaction(receiverAddress,amount,setShowCoin){
+    try{
+    //   const resp=await axios.post(`http://localhost:3000/transaction/sendmoney`,{
+    //     receiverAddress,
+    //     amount
+    //   },{
+    //     withCredentials:true
+    //   });
+    //   console.log(resp.data);
+
+      setShowCoin(true);
+    //   setTimeout(() => {
+    //   setShowCoin(false);
+    //   }, 3000); 
+
+    }catch(error){
+      console.log("Error:",error);
+    }    
+  }
+
+function CoinButton({balance,user1Bool,user2Bool,receiverAddress,amount}) {
   const [showCoin, setShowCoin] = useState(false);
 
-  const handleTransaction = () => {
-    setShowCoin(true);
-    setTimeout(() => {
-      setShowCoin(false);
-    }, 3000); 
-  };
+  
 
   return (
     <div className="bg-[#f5f2e5] flex flex-col items-center justify-center">
         <div>
             {!showCoin && (
             <button
-                onClick={handleTransaction}
+                onClick={() => initiateTransaction(receiverAddress,amount,setShowCoin)}
                 className={`px-8 py-3 bg-[#ffcfcb] border-2 border-black text-xl font-bold rounded-md hover:bg-[#DC483A] transition-all ${!(user1Bool && user2Bool) ? 'cursor-not-allowed opacity-50' : 'bg-[#f8968d]'}`}
                 disabled={!(user1Bool && user2Bool)}
             >

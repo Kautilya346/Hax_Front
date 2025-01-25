@@ -25,15 +25,15 @@ const HirePage = () => {
     }
 
     setLoading(true);
-    console.log("hiiiiiiiiiiiiiiiiiiiiii");
-    console.log(person);
-    console.log(person.userid);
-    console.log(person.price);
-    console.log(description);
+    // console.log("hiiiiiiiiiiiiiiiiiiiiii");
+    // console.log(person);
+    // console.log(person.userid);
+    // console.log(person.price);
+    // console.log(description);
     try {
       // Make POST request to backend to create the project
       const response = await axios.post(
-        "https://hax-back.vercel.app/project",
+        "http://localhost:3000/project",
         {
           user2: person.userid, // Freelancer's ID
           price: person.price, // Price associated with the freelancer
@@ -49,7 +49,6 @@ const HirePage = () => {
         }
       );
 
-      console.log("byyyyyy");
       console.log("Project Created:", response.data);
       alert("Project successfully created!");
       setDescription(""); // Reset the description field after success

@@ -13,7 +13,8 @@ const SignupPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isLoadingPage, setIsLoadingPage] = useState(true); // Manage page loading state
+  const [openModal,setOpenModal]=useState(false);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
