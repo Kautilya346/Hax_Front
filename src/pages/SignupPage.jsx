@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GridLines from "react-gridlines";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+import Preloader from "../assets/preloader"; // Import Preloader component
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ const SignupPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isLoadingPage, setIsLoadingPage] = useState(true); // Manage page loading state
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,9 +52,26 @@ const SignupPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Simulate a loading delay to show the preloader
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false); // Hide preloader after 2 seconds
+    }, 300);
+
+    return () => clearTimeout(timer); // Clean up the timeout on component unmount
+  }, []);
+
   return (
-    <div className="bg-[#f5f2e5] h-screen flex items-center justify-center pb-16">
-      <GridLines className="grid-area" cellWidth={20} strokeWidth={1} cellWidth2={20}>
+    <div className="bg-[#f5f2e5] h-screen flex items-center justify-center pb-16 relative">
+      {/* Display preloader if page is loading */}
+      {isLoadingPage && <Preloader />}
+
+      <GridLines
+        className="grid-area"
+        cellWidth={20}
+        strokeWidth={1}
+        cellWidth2={20}
+      >
         <motion.div
           className="border-[30%] border-black p-10 rounded-lg relative"
           initial={{ borderWidth: "0.1px", borderColor: "#000" }}
@@ -86,7 +104,10 @@ const SignupPage = () => {
                   Create an Account
                 </motion.h2>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-4 mt-6 font-mono">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 mt-6 font-mono"
+              >
                 <div className="flex items-center space-x-4">
                   <motion.label
                     className="text-xl font-semibold w-28 text-black"
@@ -152,7 +173,11 @@ const SignupPage = () => {
                 </div>
                 <motion.button
                   type="submit"
-                  className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide"
+                  className="w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
+    shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
+    transition-all duration-300 ease-in-out transform-gpu 
+    hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
+    active:translate-y-2 active:shadow-none"
                   disabled={loading}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
