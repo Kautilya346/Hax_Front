@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
 import dinoImage from "../assets/dino.svg";
 import GridLines from "react-gridlines";
 import { FaCaretRight } from "react-icons/fa";
@@ -67,6 +67,10 @@ const StaircaseText = ({ text, className = "" }) => {
 const HomePage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef(null);
+  const navigate = useNavigate();
+  const handleNavigate = (domain) => {
+    navigate("/explore", { state: { domain } });
+  };
 
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
@@ -127,11 +131,12 @@ const HomePage = () => {
               >
                 Search
               </button> */}
-              <Link to="/profile" className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
+              <Link
+                to="/profile"
+                className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
               >
-              Profile
+                Profile
               </Link>
-
               <Link
                 to="/explore"
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
@@ -215,19 +220,31 @@ const HomePage = () => {
         </motion.div>
         <div>
           <div className="flex flex-wrap justify-around items-center gap-4 p-5">
-            <div className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer">
+            <div
+              className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer"
+              onClick={() => handleNavigate("Web Development")}
+            >
               Web Developer
               <FaCaretRight />
             </div>
-            <div className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer">
+            <div
+              className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer"
+              onClick={() => handleNavigate("App Development")}
+            >
               App Developer
               <FaCaretRight />
             </div>
-            <div className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer">
+            <div
+              className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer"
+              onClick={() => handleNavigate("Video Editor")}
+            >
               Video Editor
               <FaCaretRight />
             </div>
-            <div className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer">
+            <div
+              className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer"
+              onClick={() => handleNavigate("Graphic Designing")}
+            >
               Graphic Designer
               <FaCaretRight />
             </div>
@@ -275,7 +292,9 @@ const HomePage = () => {
               transition={{ duration: 1, delay: 0.6 }}
             >
               <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-2xl font-bold font-mono">AI Powered Development</h3>
+              <h3 className="text-2xl font-bold font-mono">
+                AI Powered Development
+              </h3>
               <p className="mt-2">
                 Create smart contracts effortlessly with Aeternity. Intuitive
                 interface, Sophia language, and LLM guidance for excellence.
@@ -289,7 +308,9 @@ const HomePage = () => {
               transition={{ duration: 1, delay: 0.7 }}
             >
               <div className="text-4xl mb-4">⚙️</div>
-              <h3 className="text-2xl font-bold font-mono">Advanced Customization</h3>
+              <h3 className="text-2xl font-bold font-mono">
+                Advanced Customization
+              </h3>
               <p className="mt-2">
                 With Advanced Customization, you can personalize your email
                 client to suit your preferences and work style.
