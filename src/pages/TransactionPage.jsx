@@ -1,15 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import dp from "../assets/dp.jpg";
 import GridLines from "react-gridlines";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { use } from "react";
 
-
-const TransactionPage =() => {
-
-  const location=useLocation();
-  const projectID= "6794826ef4e37ad98cefac14";
+const TransactionPage = () => {
+  const location = useLocation();
+  const projectID = "6794826ef4e37ad98cefac14";
 
   const [user1Name, setUser1Name] = useState("Hacker");
   const [user1Dp, setUser1Dp] = useState("https://randomuser.me/api/portraits/men/12.jpg");
@@ -20,62 +17,74 @@ const TransactionPage =() => {
   const [user2Dp, setUser2Dp] = useState("https://randomuser.me/api/portraits/women/11.jpg");
   const [user2PublicKey, setUser2PublicKey] = useState("nehru");
   const [user2Bool, setUser2Bool] = useState(true);
-  
+
+  const [balance,setBalance]=useState(0);
+
+  useEffect(() => {
+    const getProject = async () => {
+      try {
+        const resp = await axios.get(`http://localhost:3000/project/getprojectdetail/${projectID}`);
+        console.log(resp.data);
+        setUser1Name(resp.data.Employer.username);
+        setUser1PublicKey(resp.data.Employer.publicKey);
+        setUser1Bool(resp.data.isProjectDoneByEmployer);
+        setUser2Name(resp.data.user2.username);
+        setUser2PublicKey(resp.data.user2.publicKey);
+        setUser2Bool(resp.data.isProjectDoneByFreelancer);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    };
+    getProject();
+  }, []);
 
 
   useEffect(() => {
-  const getProject=async()=>{
-    
-    try {
-      const resp=await axios.get(`http://localhost:3000/project/getprojectdetail/${projectID}`);
-      console.log(resp.data)
-      setUser1Name(resp.data.Employer.username);
-      //setUser1Dp();
-      setUser1PublicKey(resp.data.Employer.publicKey);
-      setUser1Bool(resp.data.Employer.verified);
-      setUser2Name(resp.data.user2.username);
-      //setUser2Dp();
-      setUser2PublicKey(resp.data.user2.publicKey);
-      setUser2Bool(resp.data.user2.verified);
-      return resp.data;
-    } catch (error) {
-      console.log("Error:",error);
+    const getbalance=async()=>{
+      try{
+        const resp=await axios.get("http://localhost:3000/transaction/getbalance",{
+          withCredentials:true
+        });
+        console.log(resp.data.resource.coin.value);
+        setBalance(resp.coin.value);
+        return resp.data.resource.coin.value;
+      }
+      catch(error){
+        console.log("Error:",error); 
+      }
     }
-  }
-  getProject();
-},[]);
+  
+    getbalance();
+  },[]);
 
+  const user = [
+    {
+      name: "Hacker",
+      dp: "https://randomuser.me/api/portraits/men/12.jpg",
+      publickey: "gandhi",
+      bool: false,
+    },
+    {
+      name: "Cutie",
+      dp: "https://randomuser.me/api/portraits/women/11.jpg",
+      publickey: "nehru",
+      bool: true,
+    },
+  ];
 
-
-  const user = [{
-    name: "Hacker",
-    dp: "https://randomuser.me/api/portraits/men/12.jpg",
-    publickey: "gandhi",
-    bool:false
-  }, {
-    name: "Cutie",
-    dp: "https://randomuser.me/api/portraits/women/11.jpg",
-    publickey:"nehru",
-    bool:true
-  }]
+  const isBothVerified = user1Bool && user2Bool;
 
   return (
     <div className="h-screen w-screen relative bg-[#f5f2e5] overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full z-0">
-        <GridLines className="grid-area h-full"
-          cellWidth={20}
-          strokeWidth={1}
-          cellWidth2={20}
-        />
+        <GridLines className="grid-area h-full" cellWidth={20} strokeWidth={1} cellWidth2={20} />
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center mt-12 font-mono">
         <div className="w-[750px] h-[70%] border-2 border-black rounded-lg p-6 bg-white shadow-lg">
-          <h1 className="text-3xl font-bold text-black mb-6 text-center h-max underline">
-            Transaction
-          </h1>
+          <h1 className="text-3xl font-bold text-black mb-6 text-center h-max underline">Transaction</h1>
           <div className="h-max flex items-center justify-center">
             <div className="relative w-full h-full">
-              <div className="border-2 border-black p-12 rounded-lg relative bg-[#f5f2e5]">
+              <div className="border-2 border-black px-12 pb-12  rounded-lg relative bg-[#f5f2e5]">
                 <div className="flex items-center justify-center mb-6 mt-10 mx-14">
                   <div className="text-center mr-10">
                     <div className="relative text-center">
@@ -86,16 +95,17 @@ const TransactionPage =() => {
                       />
                     </div>
                     <p className="text-3xl text-black font-gravity">{user1Name}</p>
-                    <p className="text-sm text-gray-600">({`${user1PublicKey.slice(0, 6)}...${user1PublicKey.slice(-4)}`})</p>                    {user1Bool ? (
+                    <p className="text-sm text-gray-600">
+                      ({`${user1PublicKey.slice(0, 6)}...${user1PublicKey.slice(-4)}`})
+                    </p>
+                    {user1Bool ? (
                       <p className="text-md font-bold text-green-600">Verified</p>
-                    ) : ( 
+                    ) : (
                       <p className="text-md font-bold text-red-600">Not Verified</p>
                     )}
                   </div>
 
-                  <div className="font-bold pb-12 mx-5 text-black text-[10vw]">
-                    →
-                  </div>
+                  <div className="font-bold pb-12 mx-5 text-black text-[10vw]">→</div>
 
                   <div className="text-center ml-10">
                     <div className="relative">
@@ -106,10 +116,12 @@ const TransactionPage =() => {
                       />
                     </div>
                     <p className="text-3xl text-black font-gravity">{user2Name}</p>
-                    <p className="text-sm text-gray-600">({`${user1PublicKey.slice(0, 6)}...${user1PublicKey.slice(-4)}`})</p>
+                    <p className="text-sm text-gray-600">
+                      ({`${user2PublicKey.slice(0, 6)}...${user2PublicKey.slice(-4)}`})
+                    </p>
                     {user2Bool ? (
                       <p className="text-md font-bold text-green-600">Verified</p>
-                    ) : ( 
+                    ) : (
                       <p className="text-md font-bold text-red-600">Not Verified</p>
                     )}
                   </div>
@@ -120,7 +132,12 @@ const TransactionPage =() => {
                 </p>
 
                 <div className="mt-6 flex justify-center">
-                  <button className="px-8 py-3 bg-[#ffcfcb] border-2 border-black text-xl font-bold rounded-md hover:bg-[#DC483A] transition-all">
+                  <button
+                    className={`px-8 py-3 bg-[#ffcfcb] border-2 border-black text-xl font-bold rounded-md hover:bg-[#DC483A] transition-all ${
+                      !isBothVerified ? "cursor-not-allowed opacity-50" : ""
+                    }`}
+                    disabled={!isBothVerified}
+                  >
                     CONFIRM
                   </button>
                 </div>
