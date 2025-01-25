@@ -15,7 +15,7 @@ const ExplorePage = () => {
     // Function to fetch services
     const fetchServices = async () => {
       try {
-        const response = await fetch("https://hax-back.vercel.app/service/users");
+        const response = await fetch("http://localhost:3000/service/users");
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }
@@ -46,112 +46,11 @@ const ExplorePage = () => {
     description: service.description,
     price: service.price.toString(),
     mainphoto: service.image,
-    contact: "1234567890", // Example contact field
+    contact: service.contact, // Example contact field
   }));
 
   console.log(peopledata);
 
-  // const peopledata = [
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/1.jpg",
-  //     name: "John Doe",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/2.jpg",
-  //     name: "Aditya Bajpayee",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/2.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     name: "Srivas",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "app development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     name: "Srivas",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "app development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/5.jpg",
-  //     name: "Kumar Ji",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "Hi, I'm Aditya, a passionate developer with expertise in the MERN stack. I specialize in creating dynamic, responsive websites with a focus on performance and user experience. I'm always eager to learn new technologies and love solving complex problems. Let's build something amazing together!",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/5.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/6.jpg",
-  //     name: "Mandav Para",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "video editing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/6.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/7.jpg",
-  //     name: "Kautila N",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web developer with 5 years of experience in web development. I have worked with many clients and have a good track record.",
-  //     domain: "graphic designing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/7.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/8.jpg",
-  //     name: "Nath Godam",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "graphic designing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/8.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/1.jpg",
-  //     name: "Jai Jinendra",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:
-  //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "video editing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/1.jpg",
-  //     contact: "1234567890",
-  //   },
-  // ];
 
   const filteredPeople = peopledata.filter(
     (person) =>

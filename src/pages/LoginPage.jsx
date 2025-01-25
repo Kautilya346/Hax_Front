@@ -28,13 +28,13 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        "https://hax-back.vercel.app/auth/login",
+        "http://localhost:3000/auth/login",
         formData,
         { withCredentials: true }
       );
       console.log("Login Success:", response.data);
       toast.success("Login Successful!");
-      navigate("/");
+      navigate("/transact");
     } catch (error) {
       console.error("Login failed:", error);
       toast.error(error.message);
