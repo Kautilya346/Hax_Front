@@ -27,7 +27,7 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(
-        "https://hax-back.vercel.app/auth/signup",
+        "http://localhost:3000/auth/signup",
         formData,
         {
           headers: {
