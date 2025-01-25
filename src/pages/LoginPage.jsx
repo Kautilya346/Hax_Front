@@ -28,7 +28,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        "https://hax-back.vercel.app/auth/login",
+        "http://localhost:3000/auth/login",
         formData,
         { withCredentials: true }
       );
