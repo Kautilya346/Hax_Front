@@ -13,6 +13,8 @@ const SignupPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [openModal,setOpenModal]=useState(false);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,6 +54,7 @@ const SignupPage = () => {
   };
 
   return (
+    
     <div className="bg-[#f5f2e5] h-screen flex items-center justify-center pb-16">
       <GridLines className="grid-area" cellWidth={20} strokeWidth={1} cellWidth2={20}>
         <motion.div
