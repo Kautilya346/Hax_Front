@@ -57,7 +57,7 @@ const ServiceForm = () => {
 
     try {
       const response = await axios.post(
-        "https://hax-back.vercel.app/service/user",
+        "http://localhost:3000/service/user",
         formDataToSend,
         {
           withCredentials: true,

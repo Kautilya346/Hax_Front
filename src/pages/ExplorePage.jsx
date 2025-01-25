@@ -15,7 +15,7 @@ const ExplorePage = () => {
     // Function to fetch services
     const fetchServices = async () => {
       try {
-        const response = await fetch("https://hax-back.vercel.app/service/users");
+        const response = await fetch("http://localhost:3000/service/users");
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }
@@ -46,7 +46,7 @@ const ExplorePage = () => {
     description: service.description,
     price: service.price.toString(),
     mainphoto: service.image,
-    contact: "1234567890", // Example contact field
+    contact: service.contact, // Example contact field
   }));
 
   console.log(peopledata);
