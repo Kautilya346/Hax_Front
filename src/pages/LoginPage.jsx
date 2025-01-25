@@ -114,7 +114,11 @@ const LoginPage = () => {
                 </motion.div>
                 <motion.button
                   type="submit"
-                  className="bg-[#DC483A] text-white px-6 py-2 rounded-md w-full mt-4 text-lg tracking-wide shadow-md"
+                  className=" w-full bg-[#ff6a5c] border-2 border-black text-black py-3 rounded-md font-bold 
+    shadow-[0_4px_0_#c34d44,0_8px_0_#8a2d27] 
+    transition-all duration-300 ease-in-out transform-gpu 
+    hover:-translate-y-1 hover:shadow-[0_6px_0_#c34d44,0_12px_0_#8a2d27] hover:bg-[#DC483A] 
+    active:translate-y-2 active:shadow-none"
                   disabled={loading}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

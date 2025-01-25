@@ -28,7 +28,7 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(
-        "https://hax-back.vercel.app/auth/signup",
+        "http://localhost:3000/auth/signup",
         formData,
         {
           headers: {
@@ -79,7 +79,7 @@ const SignupPage = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.div
-            className="border-2 border-black p-8 rounded-md"
+            className="border-9 border-black p-8 rounded-md"
             initial={{ borderWidth: "0.1px", borderColor: "#000" }}
             animate={{ borderWidth: "3px", borderColor: "#000" }}
             transition={{ duration: 0.6 }}
