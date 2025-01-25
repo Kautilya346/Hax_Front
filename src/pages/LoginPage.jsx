@@ -34,7 +34,7 @@ const LoginPage = () => {
       );
       console.log("Login Success:", response.data);
       toast.success("Login Successful!");
-      navigate("/");
+      navigate("/transact");
     } catch (error) {
       console.error("Login failed:", error);
       toast.error(error.message);
