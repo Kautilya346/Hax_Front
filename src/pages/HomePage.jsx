@@ -234,7 +234,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="border-black border-t-4 pb-20 mt-5 pt-5">
+        <div className="border-black border-t-4 pb-10 mt-5 pt-5">
           <motion.h2
             className="text-center text-6xl font-gravity font-bold"
             initial={{ x: -100 }}
@@ -298,15 +298,14 @@ const HomePage = () => {
           </div>
 
           <motion.p
-            className="text-center mt-16"
+            className="text-center mt-16 font-bold"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
           >
             Made with ❤️ by bunch of
-            <span className="ml-2 font-gravity text-3xl">
-              {" "}
-              Adityas and mano
+            <span className="ml-2 font-gravity text-3xl ">
+              Adityas, Kautilya & Manav.
             </span>
           </motion.p>
         </div>
