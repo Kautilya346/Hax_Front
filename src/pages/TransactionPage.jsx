@@ -4,6 +4,7 @@ import GridLines from "react-gridlines";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { use } from "react";
+import CoinButton from "../components/CoinButton";
 
 
 const TransactionPage =() => {
@@ -14,13 +15,15 @@ const TransactionPage =() => {
   const [user1Name, setUser1Name] = useState("Hacker");
   const [user1Dp, setUser1Dp] = useState("https://randomuser.me/api/portraits/men/12.jpg");
   const [user1PublicKey, setUser1PublicKey] = useState("gandhi");
-  const [user1Bool, setUser1Bool] = useState(false);
+  const [user1Bool, setUser1Bool] = useState(true);
 
   const [user2Name, setUser2Name] = useState("Cutie");
   const [user2Dp, setUser2Dp] = useState("https://randomuser.me/api/portraits/women/11.jpg");
   const [user2PublicKey, setUser2PublicKey] = useState("nehru");
   const [user2Bool, setUser2Bool] = useState(true);
   
+
+  const [balance,setBalance]=useState(0);
 
 
   useEffect(() => {
@@ -43,6 +46,25 @@ const TransactionPage =() => {
     }
   }
   getProject();
+},[]);
+
+
+useEffect(() => {
+  const getbalance=async()=>{
+    try{
+      const resp=await axios.get(`http://localhost:3000/transaction/getbalance`,{
+        withCredentials:true
+      });
+      console.log(resp.data.resource.coin.value);
+      setBalance(resp.data.resource.coin.value);
+      return resp.data.resource.coin.value;
+    }
+    catch(error){
+      console.log("Error:",error); 
+    }
+  }
+
+  getbalance();
 },[]);
 
 
@@ -120,9 +142,7 @@ const TransactionPage =() => {
                 </p>
 
                 <div className="mt-6 flex justify-center">
-                  <button className="px-8 py-3 bg-[#ffcfcb] border-2 border-black text-xl font-bold rounded-md hover:bg-[#DC483A] transition-all">
-                    CONFIRM
-                  </button>
+                  <CoinButton balance={balance} user1Bool={user1Bool} user2Bool={user2Bool}/> 
                 </div>
               </div>
             </div>
