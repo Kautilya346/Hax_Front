@@ -9,10 +9,8 @@ const ExplorePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activePerson, setActivePerson] = useState(null);
   const [domainFilter, setDomainFilter] = useState("");
-
   const [services, setServices] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     // Function to fetch services
     const fetchServices = async () => {
@@ -22,7 +20,8 @@ const ExplorePage = () => {
           throw new Error("Failed to fetch services");
         }
         const data = await response.json();
-        setServices(data.services); // Update state with the fetched services
+        setServices(data.services);
+        console.log(services); // Update state with the fetched services
       } catch (error) {
         setError(error.message); // Set error if any
       }
@@ -39,7 +38,7 @@ const ExplorePage = () => {
   }
 
   const peopledata = services.map((service) => ({
-    _id: service._id, // Adding the id field from the original object
+    userid: service.user._id, // Adding the id field from the original object
     dp: service.image,
     name: service.title,
     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
@@ -57,6 +56,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "web development",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
   //     contact: "1234567890",
@@ -67,6 +67,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "web development",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/women/2.jpg",
   //     contact: "1234567890",
@@ -77,6 +78,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "app development",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
   //     contact: "1234567890",
@@ -87,6 +89,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "app development",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
   //     contact: "1234567890",
@@ -97,6 +100,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "Hi, I'm Aditya, a passionate developer with expertise in the MERN stack. I specialize in creating dynamic, responsive websites with a focus on performance and user experience. I'm always eager to learn new technologies and love solving complex problems. Let's build something amazing together!",
+  //     domain: "web development",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/men/5.jpg",
   //     contact: "1234567890",
@@ -107,6 +111,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "video editing",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/men/6.jpg",
   //     contact: "1234567890",
@@ -117,6 +122,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web developer with 5 years of experience in web development. I have worked with many clients and have a good track record.",
+  //     domain: "graphic designing",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/men/7.jpg",
   //     contact: "1234567890",
@@ -127,6 +133,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
+  //     domain: "graphic designing",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/men/8.jpg",
   //     contact: "1234567890",
@@ -137,98 +144,7 @@ const ExplorePage = () => {
   //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
   //     description:
   //       "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/1.jpg",
-  //     contact: "1234567890",
-  //   },
-  // ];
-  // const peopledata = [
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/1.jpg",
-  //     name: "John Doe",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description:"I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/1.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/2.jpg",
-  //     name: "Aditya Bajpayee",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/2.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     name: "Srivas",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain:"app development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     name: "Srivas",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain:"app development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/women/4.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/5.jpg",
-  //     name: "Kumar Ji",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "Hi, I'm Aditya, a passionate developer with expertise in the MERN stack. I specialize in creating dynamic, responsive websites with a focus on performance and user experience. I'm always eager to learn new technologies and love solving complex problems. Let's build something amazing together!",
-  //     domain: "web development",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/5.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/6.jpg",
-  //     name: "Mandav Para",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain:"video editing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/6.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/7.jpg",
-  //     name: "Kautila N",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web developer with 5 years of experience in web development. I have worked with many clients and have a good track record.",
-  //     domain:"graphic designing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/7.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/men/8.jpg",
-  //     name: "Nath Godam",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain:"graphic designing",
-  //     price: "500",
-  //     mainphoto: "https://randomuser.me/api/portraits/men/8.jpg",
-  //     contact: "1234567890",
-  //   },
-  //   {
-  //     dp: "https://randomuser.me/api/portraits/women/1.jpg",
-  //     name: "Jai Jinendra",
-  //     work: "I will redesign existing Wix, Wix Studio, and Squarespace website",
-  //     description: "I am a professional web designer with 5 years of experience. I have worked with many clients and have a good track record.",
-  //     domain:"video editing",
+  //     domain: "video editing",
   //     price: "500",
   //     mainphoto: "https://randomuser.me/api/portraits/women/1.jpg",
   //     contact: "1234567890",
@@ -251,12 +167,6 @@ const ExplorePage = () => {
     navigate("/hire", { state: { person } });
   };
 
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const toggleDropdown = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
   return (
     <div className="h-full w-screen">
       <div className="bg-[#f5f2e5] h-full w-screen">
@@ -271,7 +181,7 @@ const ExplorePage = () => {
             animate="visible"
             exit="exit"
           >
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center ">
               <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">
                 Experts Available
               </h1>
@@ -286,7 +196,7 @@ const ExplorePage = () => {
                   className="border h-12 border-gray-300 rounded-md px-3 py-2 mb-8 w-2/3 outline-none focus:ring-2 focus:ring-[#bdaa6d] placeholder:text-gray-400 text-xl"
                 />
                 <select
-                  className="w-fit border font-serif h-12 bg-[#fc8277] border-gray-300 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
+                  className=" w-fit border font-serif h-12 bg-[#fc8277] border-gray-300 rounded-lg mb-8 outline-none focus:ring-2 focus:ring-[#bdaa6d] font-bold text-xl px-2"
                   onChange={(event) => setDomainFilter(event.target.value)}
                   defaultValue=""
                 >
@@ -303,9 +213,9 @@ const ExplorePage = () => {
                     No results found
                   </p>
                 ) : (
-                  filteredPeople.map((person) => (
+                  filteredPeople.map((person, index) => (
                     <PeopleCard
-                      key={person.id} // Use unique identifier instead of index
+                      key={index}
                       dp={person.dp}
                       name={person.name}
                       work={person.work}
@@ -323,6 +233,7 @@ const ExplorePage = () => {
                     <div
                       className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                       style={{ animation: "fadeIn 0.5s forwards" }}
+                      onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
                     >
                       <img
@@ -350,6 +261,19 @@ const ExplorePage = () => {
                             {activePerson.work}
                           </p>
                         </div>
+                      </div>
+                      <div className="mt-2 text-wrap">
+                        <span className="font-bold">Description : </span>
+                        <span className="">{activePerson.description}</span>
+                      </div>
+                      <div className="text-gray-900 text-lg font-semibold mt-3">
+                        Price : APT{activePerson.price}
+                      </div>
+                      <div className="mt-1">
+                        <span>
+                          <span className="font-bold">Contact : </span>
+                          {activePerson.contact}
+                        </span>
                       </div>
                     </div>
                   </div>
