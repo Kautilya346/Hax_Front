@@ -22,9 +22,9 @@ async function initiateTransaction(receiverAddress,amount){
 
 const TransactionPage = () => {
   const location = useLocation();
-  const { projectID } = location.state || {};
-  //const projectID = "6794826ef4e37ad98cefac14";
-  console.log("Project ID:", projectID); 
+  const { projectId } = location.state || {};
+  //const projectId = "6794826ef4e37ad98cefac14";
+  console.log("Project ID:", projectId); 
 
   const [user1Name, setUser1Name] = useState("Hacker");
   const [user1Dp, setUser1Dp] = useState("https://randomuser.me/api/portraits/men/12.jpg");
@@ -40,16 +40,18 @@ const TransactionPage = () => {
 
 
   const user = [{
-    dp: "https://randomuser.me/api/portraits/men/12.jpg",
+    dp: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
   }, {
-    dp: "https://randomuser.me/api/portraits/women/11.jpg",
+    dp: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
   }
   ];
+
+
 
   useEffect(() => {
     const getProject = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/project/getprojectdetail/${projectID}`);
+        const resp = await axios.get(`http://localhost:3000/project/getprojectdetail/${projectId}`);
         console.log(resp.data);
         setUser1Name(resp.data.Employer.username);
         setUser1PublicKey(resp.data.Employer.publicKey);
@@ -142,7 +144,7 @@ useEffect(() => {
                 </div>
 
                 <p className="text-center text-2xl font-bold text-black">
-                  Amount : <span className="text-[#000000]">$30,000</span>
+                  Amount : <span className="text-[#000000]">APT {amount}</span>
                 </p>
 
                 <div className="mt-6 flex justify-center">
