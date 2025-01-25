@@ -33,7 +33,7 @@ const HirePage = () => {
     try {
       // Make POST request to backend to create the project
       const response = await axios.post(
-        "https://hax-back.vercel.app/project",
+        "http://localhost:3000/project",
         {
           user2: person.userid, // Freelancer's ID
           price: person.price, // Price associated with the freelancer
@@ -63,7 +63,11 @@ const HirePage = () => {
 
   return (
     <div className="font-mono h-auto">
-      <GridLines className="min-h-screen h-full grid-area" cellWidth={20} strokeWidth={1}>
+      <GridLines
+        className="min-h-screen h-full grid-area"
+        cellWidth={20}
+        strokeWidth={1}
+      >
         {person ? (
           <motion.div
             variants={pageVariants}

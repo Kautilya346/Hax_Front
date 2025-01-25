@@ -46,8 +46,8 @@ export const PeopleCard = ({
         <img
           src={mainphoto}
           alt="Profile Work"
-          className="object-cover w-4/5 mx-auto py-5"
-          style={{ width: '250px', height: '300px' }}
+          className="object-contain w-4/5 mx-auto py-5"
+          style={{ width: "250px", height: "300px" }}
         />
       </div>
       <hr className="border-black border-2 mx-10 rounded-lg" />
@@ -57,8 +57,7 @@ export const PeopleCard = ({
             src={dp}
             alt="Profile"
             className="w-1/6 h-1/6 object-contain rounded-full"
-            style={{ width: '40px', height: '40px' }}
-
+            style={{ width: "40px", height: "40px" }}
           />
           <h3 className="text-l font-bold text-black">{name}</h3>
         </div>

@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import GridLines from "react-gridlines";
 import { PeopleCard } from "../components/PeopleCard";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import img1 from "../assets/1.png";
+import img2 from "../assets/2.png";
+import img3 from "../assets/3.webp";
+import img4 from "../assets/4.png";
 const ExplorePage = () => {
+  const location = useLocation();
+  const { domain } = location.state || {};
+
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [activePerson, setActivePerson] = useState(null);
@@ -42,20 +49,29 @@ const ExplorePage = () => {
     dp: service.image,
     name: service.user.username,
     work: service.title,
-    domain: "web development",
+    domain: service.domain, // Example domain field
     description: service.description,
     price: service.price.toString(),
-    mainphoto: service.image,
+    mainphoto:
+      service.domain === "Web Development"
+        ? img3
+        : service.domain === "App Development"
+        ? img4
+        : service.domain === "Video Editing"
+        ? img2
+        : service.domain === "Graphic Designing"
+        ? img1
+        : 1, // Default to service.image if no match
     contact: service.contact, // Example contact field
   }));
 
   console.log(peopledata);
 
-
   const filteredPeople = peopledata.filter(
     (person) =>
       person.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      person.domain.includes(domainFilter)
+      person.domain.includes(domainFilter) &&
+      (!domain || person.domain.includes(domain)) // Show all if domain is undefined
   );
 
   const pageVariants = {
@@ -83,7 +99,7 @@ const ExplorePage = () => {
             animate="visible"
             exit="exit"
           >
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center">
               <h1 className="text-7xl tracking-wide text-gray-800 font-gravity">
                 Experts Available
               </h1>
@@ -103,10 +119,10 @@ const ExplorePage = () => {
                   defaultValue=""
                 >
                   <option value="">All Experts</option>
-                  <option value="web development">Web Development</option>
-                  <option value="app development">App Development</option>
-                  <option value="video editing">Video Editing</option>
-                  <option value="graphic designing">Graphic Designing</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="App Development">App Development</option>
+                  <option value="Video Editing">Video Editing</option>
+                  <option value="Graphic Designing">Graphic Designing</option>
                 </select>
               </div>
               <div className="relative w-full flex flex-wrap justify-center items-center gap-5 max-w-8xl">
@@ -134,7 +150,7 @@ const ExplorePage = () => {
                 {activePerson && (
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-10">
                     <div
-                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-gradient-to-r from-[#fc8277] via-white to-[#fc8277] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border border-gray-300 transition-all duration-500 ease-in-out transform opacity-0 scale-75"
+                      className="h-fit w-11/12 mx-auto absolute z-20 bg-[#efe9ca] bg-opacity-85 p-6 rounded-lg shadow-2xl backdrop-blur-lg border-2 border-black transition-all duration-500 ease-in-out transform opacity-0 scale-75"
                       style={{ animation: "fadeIn 1s forwards" }}
                       onMouseEnter={() => setActivePerson(activePerson)}
                       onMouseLeave={() => setActivePerson(null)}
@@ -167,7 +183,7 @@ const ExplorePage = () => {
                       </div>
                       <div className="mt-2 text-wrap">
                         <span className="font-bold">Description : </span>
-                        <span className="">{activePerson.description}</span>
+                        <span>{activePerson.description}</span>
                       </div>
                       <div className="text-gray-900 text-lg font-semibold mt-3">
                         Price : APT{activePerson.price}
