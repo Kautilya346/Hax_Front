@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import banner from "../assets/banner.png";
+import banner from "../assets/bannerAptos.webp";
 import dp from "../assets/dp.jpg";
 import { FaPaste, FaStar } from "react-icons/fa";
+import { IoIosRemoveCircle } from "react-icons/io";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThreeCircles } from "react-loader-spinner"; // Import ThreeCircles loader
@@ -132,7 +133,7 @@ const ProfilePage = () => {
         <img
           src={banner}
           alt="banner"
-          className="w-full h-[250px] object-cover rounded-lg"
+          className="w-full h-[350px] object-cover rounded-lg"
         />
       </div>
 
@@ -193,21 +194,21 @@ const ProfilePage = () => {
             projects.map((project, index) => (
               <div
                 key={project._id}
-                className="bg-[#f5f2e5] border-2 border-black p-6 rounded-lg shadow-md hover:shadow-lg transition-all"
+                className="bg-white border-2 border-black p-6 rounded-lg shadow-md hover:shadow-lg transition-all"
               >
                 <div className="flex justify-between mb-4">
                   <h3 className="text-xl font-bold">Service {index + 1}</h3>
-                  <span className="text-sm font-medium">
+                  <span className="text-md  font-semibold">
                     ${project.price || "N/A"}
                   </span>
                 </div>
-                <h3 className="text-xl font-thin font-mono">
+                <h3 className="text-xl font font-mono ">
                   Employer : {project.Employer.username}{" "}
                 </h3>
                 <h3 className="text-xl font-thin font-mono">
                   Freelancer : {project.user2.username}
                 </h3>
-                <p className="text-sm font-mono">
+                <p className="text-md font-mono py-4">
                   {project.description ||
                     "A brief description of the service offered goes here. Add more details to make it engaging."}
                 </p>

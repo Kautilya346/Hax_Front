@@ -3,6 +3,7 @@ import GridLines from "react-gridlines";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const HirePage = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const HirePage = () => {
   const handleHireClick = async () => {
     if (!person || !description) {
       // Check if person data and description are available
-      alert("Please fill in the description to hire!");
+      toast.error("Please fill in the description to hire!");
       return;
     }
 
@@ -50,11 +51,11 @@ const HirePage = () => {
       );
 
       console.log("Project Created:", response.data);
-      alert("Project successfully created!");
+      toast.success("Project successfully created!");
       setDescription(""); // Reset the description field after success
     } catch (error) {
       console.error("Error creating project:", error);
-      alert("Failed to hire freelancer, please try again.");
+      toast.error("Failed to hire freelancer, please try again.");
     } finally {
       setLoading(false); // Reset the loading state
     }
@@ -132,6 +133,7 @@ const HirePage = () => {
           <p>No person data found</p>
         )}
       </GridLines>
+      <Toaster />
     </div>
   );
 };

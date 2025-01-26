@@ -51,7 +51,7 @@ const SignupPage = () => {
       });
       console.log(response.data)
       setPrivateKey(response.data.privateKey)
-      setOpenModal(true)
+       setOpenModal(true)
     } catch (error) {
       console.error("Request failed:", error);
       setError("Network error, please check your connection.");
@@ -68,7 +68,7 @@ const SignupPage = () => {
 
     const handleRedirect = () => {
       setOpenModal(false);
-      navigate("/profile");
+      navigate("/login");
       };
 
   return (
@@ -357,9 +357,12 @@ const SignupPage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Go to Profile →
+              Go to Login →
             </motion.button>
           </div>
+          <div className="font-mono text-xs">
+              <p>*Your Account has been credited APT 10000000 for demonstration purposes.</p>
+            </div>
         </motion.div>
       </motion.div>
     )}

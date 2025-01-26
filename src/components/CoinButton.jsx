@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 async function initiateTransaction(receiverAddress, amount) {
   try {
@@ -23,13 +24,17 @@ async function initiateTransaction(receiverAddress, amount) {
 }
 
 function CoinButton({ balance, user1Bool, user2Bool, receiverAddress, amount }) {
+  const [loading,setLoading]=useState(false);
   const [showCoin, setShowCoin] = useState(false);
   const [transactionData, setTransactionData] = useState(null);
+  const Navigate = useNavigate();
 
   async function handleClick() {
     try {
+      setLoading(true);
       const resp = await initiateTransaction(receiverAddress, amount);
       setTransactionData(resp); // Store transaction response in state
+      setLoading(false);
       setShowCoin(true); // Show coin animation
     } catch (error) {
       console.error("Transaction failed:", error);
@@ -49,7 +54,7 @@ function CoinButton({ balance, user1Bool, user2Bool, receiverAddress, amount }) 
             }`}
             disabled={!(user1Bool && user2Bool)}
           >
-            CONFIRM
+            {loading ? "Loading..." : "Send Money"}
           </button>
         )}
       </div>
@@ -88,7 +93,7 @@ function CoinButton({ balance, user1Bool, user2Bool, receiverAddress, amount }) 
                   </div>
                   <button
                     className="mt-6 w-fit mx-auto px-3 py-1 bg-[#ffcfcb] border-2 border-black text-xl rounded-md hover:bg-[#DC483A] transition-all"
-                    onClick={() => setShowCoin(false)}
+                    onClick={() => {setShowCoin(false); Navigate("/")}}
                   >
                     Okay, got it!
                   </button>

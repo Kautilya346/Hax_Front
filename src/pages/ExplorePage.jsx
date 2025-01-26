@@ -171,7 +171,7 @@ const ExplorePage = () => {
                       <img
                         src={activePerson.mainphoto}
                         alt="Main"
-                        className="mx-auto w-72 h-72 object-cover rounded-xl"
+                        className="mx-auto w-72 h-72 object-contain rounded-xl"
                       />
                       <button
                         onClick={() => handleClick(activePerson)}

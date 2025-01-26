@@ -77,7 +77,7 @@ useEffect(() => {
       const resp=await axios.get(`http://localhost:3000/transaction/getbalance`,{
         withCredentials:true
       });
-      console.log(resp.data.resource.coin.value);
+      console.log(resp.data);
       setBalance(resp.data.resource.coin.value);
       return resp.data.resource.coin.value;
     }

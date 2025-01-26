@@ -123,7 +123,7 @@ const HomePage = () => {
                 to="/signup"
                 className="px-[57px] text-[#f5f2e5] text-[40px] transition-transform transform hover:scale-110 hover:text-[#DC483A] duration-300 ease-in-out"
               >
-                Signup
+                Register
               </Link>
               {/* <button
                 onClick={handleSearchClick}
@@ -236,7 +236,7 @@ const HomePage = () => {
             </div>
             <div
               className="px-6 py-3 flex items-center bg-[#DC483A] text-white font-semibold font-gravity text-2xl hover:scale-110 rounded-full shadow-md hover:bg-[#b9362c] transition-all duration-300 cursor-pointer"
-              onClick={() => handleNavigate("Video Editor")}
+              onClick={() => handleNavigate("Video Editing")}
             >
               Video Editor
               <FaCaretRight />
@@ -280,8 +280,8 @@ const HomePage = () => {
               <div className="text-4xl mb-4">📄</div>
               <h3 className="text-2xl font-bold font-mono">1-Stop Solution</h3>
               <p className="mt-2">
-                Aeternity’s enchanting platform: effortlessly forge, deploy, and
-                transform your ideas into powerful smart contracts.
+                Find all the services you need in one place, from web
+                development to graphic designing.
               </p>
             </motion.div>
 
@@ -293,11 +293,11 @@ const HomePage = () => {
             >
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-2xl font-bold font-mono">
-                AI Powered Development
+                Web3 Integration
               </h3>
               <p className="mt-2">
-                Create smart contracts effortlessly with Aeternity. Intuitive
-                interface, Sophia language, and LLM guidance for excellence.
+                Seamlessly integrate your Web3 wallet with Free3Lance for secure
+                and transparent transactions.
               </p>
             </motion.div>
 
@@ -309,11 +309,10 @@ const HomePage = () => {
             >
               <div className="text-4xl mb-4">⚙️</div>
               <h3 className="text-2xl font-bold font-mono">
-                Advanced Customization
+                Seamless Transaction
               </h3>
               <p className="mt-2">
-                With Advanced Customization, you can personalize your email
-                client to suit your preferences and work style.
+                Provides Seamless transactions with the help of smart contracts.
               </p>
             </motion.div>
           </div>
